@@ -1,6 +1,0 @@
-[submodule "asteroidsyncserviced/libasteroid"]
-	path = asteroidsyncserviced/libasteroid
-	url = https://github.com/AsteroidOS/libasteroid
-[submodule "asteroidsyncserviced/libwatchfish"]
-	path = asteroidsyncserviced/libwatchfish
-	url = https://github.com/piggz/libwatchfish.git
