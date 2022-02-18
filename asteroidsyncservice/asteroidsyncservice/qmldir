@@ -1,0 +1,3 @@
+module org.asteroid.syncservice
+
+plugin asteroidsyncserviceplugin

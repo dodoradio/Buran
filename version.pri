@@ -1,0 +1,4 @@
+VERSION = "1.0"
+DEFINES += VERSION=\\\"$$VERSION\\\"
+CONFIG += starship
+#DEFINES += 
