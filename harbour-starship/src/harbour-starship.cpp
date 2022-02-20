@@ -17,6 +17,8 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "buran_config.h"
+
 #ifdef QT_QML_DEBUG
 #include <QtQuick>
 #endif
@@ -39,7 +41,7 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
 
-//    app->setApplicationVersion(VERSION);
+    app.setApplicationVersion(VERSION);
 //    QCoreApplication::setOrganizationName("harbour-starship");
 //    QCoreApplication::setOrganizationDomain("asteriodos.org");
 //    QCoreApplication::setApplicationName("harbour-starship");

@@ -8,8 +8,6 @@ target_link_libraries(harbour-starship PRIVATE Qt5::Quick Qt5::Qml)
 target_include_directories(harbour-starship
     PUBLIC
         $<INSTALL_INTERFACE:.>
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
-    PRIVATE
-        ${CMAKE_CURRENT_SOURCE_DIR}/services
+        $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}>
 )
 install(TARGETS harbour-starship)
