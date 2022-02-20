@@ -5,4 +5,5 @@ qrc_*.cpp
 documentation.list
 *.qm
 *.pro.user
+*.swp
 /build**
