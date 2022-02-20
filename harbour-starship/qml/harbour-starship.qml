@@ -32,6 +32,13 @@ Page {
     height: 480
     focus: true
 
+    ServiceController {
+        id: serviceController
+        Component.onCompleted: initService()
+        Component.onDestruction: serviceController.stopService()
+    }
+
+
     header: ToolBar {
         id: header
         Row{
@@ -63,7 +70,7 @@ Page {
                     height: parent.height
                     width: height
                     //color: Suru.foregroundColor
-                    source: watchConnected ? Qt.resolvedUrl("./img/ios-bluetooth-connected.svg") : Qt.resolvedUrl("./img/ios-bluetooth.svg")
+                    source: curWatchConnected ? Qt.resolvedUrl("./img/ios-bluetooth-connected.svg") : Qt.resolvedUrl("./img/ios-bluetooth.svg")
                 }
 
                 Label { //text whether watch is connected
@@ -87,7 +94,7 @@ Page {
 
                 Label {
                 id: batteryLabel
-                text: curWatchConnected ? batteryLevel + ("%") : "unknown"
+                text: curWatchConnected ? getCurWatch().batteryLevel + ("%") : "unknown"
 
 
 
@@ -102,6 +109,7 @@ Page {
        width: true ? (parent.height/parent.width > 1 ? parent.width : parent.width/5) : 0
        columns: parent.height/parent.width > 1 ? 2 : 1
        palette.window: "orange"
+       watch: getCurWatch()
        Behavior on width { NumberAnimation { duration: 100 } }
    }
 
@@ -117,10 +125,6 @@ Page {
     }
 //    cover: Qt.resolvedUrl("cover/CoverPage.qml")
 
-
-    ServiceController {
-        id: settings
-    }
 
     Watches {
         id: watches
@@ -139,6 +143,7 @@ Page {
     }
 
     function initService() {
+        serviceController.startService();
         if (!watches.connectedToService && !serviceController.serviceRunning) {
             serviceController.startService();
         }
