@@ -1,7 +1,7 @@
 import QtQuick 2.4
 import QtQuick.Controls 2.15
 
-Pane {
+Page {
     id: notificationServiceItem
     anchors.fill: parent
 

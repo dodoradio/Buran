@@ -38,17 +38,17 @@ Page {
             enabled: watches.count !== 0
             width: parent.width
 
-            RowLayout {
-                    height: Theme.iconSizeLarge
-                    width: parent.width
+            Row {
+                width: parent.width
 
-                Button {
-                    //icon.height: Theme.iconSizeSmall
-                    //icon.width: height
-                    icon.name: "mail-thread-watch"
+                Image {
+                    source: Qt.resolvedUrl("../img/md-watch.svg")
+                    height: coolumn.height
+                    width: height
                 }
 
-                ColumnLayout {
+                Column {
+                    id: coolumn
                     Label {
                         text: name
                     }
@@ -69,8 +69,8 @@ Page {
             Label {
                 id: noWatchLabel
                 text: qsTr(watches.count + "No smartwatches configured yet. Please connect your smartwatch using System Settings.")
-                font.pixelSize: Theme.fontSizeLarge
-                width: parent.width-(Theme.paddingSmall*2)
+                //font.pixelSize: Theme.fontSizeLarge
+                //width: parent.width-(Theme.paddingSmall*2)
                 anchors.centerIn: parent
                 //anchors.bottomMargin: Theme.paddingLarge
                 horizontalAlignment: Text.AlignHCenter

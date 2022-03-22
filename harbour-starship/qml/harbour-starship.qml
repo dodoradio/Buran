@@ -20,6 +20,7 @@
 import QtQuick 2.2
 import org.asteroid.syncservice 1.0
 import QtQuick.Controls 2.15
+import Qt.labs.settings 1.0
 import "pages"
 
 Page {
@@ -37,93 +38,26 @@ Page {
         Component.onCompleted: initService()
         Component.onDestruction: serviceController.stopService()
     }
+    Settings {
+        id: settings
+        fileName: "/home/dodoradio/Projects/buran/settings.txt"
+        property alias windowWidth: starship.width
+        property alias windowHeight: starship.height
+        //Component.onCompleted: uiLoader.source = settings.value("uiStyle",1) ? "pages/MainMenuPageDesktop.qml" : "pages/MainMenuPageMobile.qml"
+    }
 
-
-    header: ToolBar {
-        id: header
-        Row{
-            id: statusRowLayout
-            //spacing: units.gu(4)
-            anchors.fill: parent
-            //anchors.top: parent.bottom
-            Button {
-                icon.name: "draw-arrow-back"
-                onClicked: {
-                    loadStack()
-                    /*if (pageStack.depth > 1) {
-                        loadStack()
-                    } else {
-                        loadStack()
-                    }*/
-                }
-                width: height
-            }
-
-            Row {
-                height: parent.height
-                width: parent.width/2
-                //spacing: units.gu(0.5)
-                //Layout.preferredHeight: units.gu(7)
-
-                Image { //shows an icon for whether watch is connected or not
-                    id: syncIcon
-                    height: parent.height
-                    width: height
-                    //color: Suru.foregroundColor
-                    source: curWatchConnected ? Qt.resolvedUrl("./img/ios-bluetooth-connected.svg") : Qt.resolvedUrl("./img/ios-bluetooth.svg")
-                }
-
-                Label { //text whether watch is connected
-                    height: parent.height
-                    id: syncLabel
-                    text: curWatchConnected ? "connected" : "disconnected"
-                }
-            }
-
-            Row {
-                //spacing: units.gu(0.5)
-
-                Button {
-                    id: batteryIcon
-                    //width: units.gu(4)
-                    //height: units.gu(3)
-                    //color: Suru.foregroundColor
-                    icon.name: "battery-good" //maybe change this so the icon changes with battery
-                    onPressed: console.log(pageStack.currentItem, pageStack.depth)
-                }
-
-                Label {
-                id: batteryLabel
-                text: curWatchConnected ? getCurWatch().batteryLevel + ("%") : "unknown"
-
-
-
-                }
-            }
+    Loader {
+        id: uiLoader
+        anchors.fill: parent
+        source: false ? "pages/RootUIDesktop.qml" : "pages/RootUIMobile.qml"
+        onLoaded: {
+            item.anchors.fill = item.parent
+            item.watch = getCurWatch()
+            //item.palette.window = "orange"
         }
     }
 
-    MainMenuPage {
-       id: mainMenu
-       height: parent.height
-       width: true ? (parent.height/parent.width > 1 ? parent.width : parent.width/5) : 0
-       columns: parent.height/parent.width > 1 ? 2 : 1
-       palette.window: "orange"
-       watch: getCurWatch()
-       Behavior on width { NumberAnimation { duration: 100 } }
-   }
 
-    StackView {
-        id: pageStack
-        anchors.top: parent.top
-        anchors.left: parent.height/parent.width > 1 ? parent.left : mainMenu.right
-        anchors.bottom: parent.bottom
-        anchors.right: parent.right
-        //palette.window: "orange"
-        clip: true
-        initialItem: Item{}
-    }
-//    cover: Qt.resolvedUrl("cover/CoverPage.qml")
 
 
     Watches {
