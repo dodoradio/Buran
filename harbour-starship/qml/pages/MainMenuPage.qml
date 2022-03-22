@@ -31,7 +31,10 @@ Pane {
     property int batteryLevel: root.watch.batteryLevel
     property int columns
 
-
+    Item {
+        id: settings
+        property bool timeSync : false
+    }
 
     //allowedOrientations: Orientation.All
     /*header: ToolBar {
@@ -112,7 +115,7 @@ Pane {
 
                 onPressed: {
                     toggled = !toggled
-                    //settings.timeSync = toggled
+                    settings.timeSync = toggled
                     if(settings.timeSync == true) timeSync();
 
                 }
