@@ -71,6 +71,10 @@ ApplicationWindow {
         }
     }
 
+    function loadStack() {
+        uiLoader.item.loadStack()
+    }
+
     function startBT() {
         lipstick.typedCall("notifyLaunching",[{"type":"s","value":"jolla-settings.desktop"}],
                            function(r){jolla.call("showPage",["system_settings/connectivity/bluetooth"])},
