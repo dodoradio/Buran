@@ -46,7 +46,7 @@ ApplicationWindow {
         property alias windowHeight: starship.height
         property alias windowX: starship.x
         property alias windowY: starship.y
-        Component.onCompleted: uiLoader.setSource(settings.value("uiStyle", 1) <  0 ? "pages/RootUIDesktop.qml" : "pages/RootUIMobile.qml")
+        Component.onCompleted: uiLoader.setSource(settings.value("uiStyle", 1) < 1 ? "pages/RootUIDesktop.qml" : "pages/RootUIMobile.qml")
     }
 
     Loader {
