@@ -17,14 +17,16 @@ Column {
             }
             Label {
                 text: "removes the persistent main menu from the edge of the screen"
-            }
+            } //TODO: some kind of word wrap so this fits on narrow screens
+            //TODO: add text 'restart required for changes to take effect
         }
         Switch {
             id: uiSwitch
             Settings {
-                fileName: "/home/dodoradio/Projects/buran/settings.txt"
                 property alias uiStyle: uiSwitch.position
             }
         }
+        //TODO: add an adjustment to the number of columns in the menubar. The two values should be independent for mobile and desktop.
     }
+
 }

@@ -21,9 +21,10 @@ import QtQuick 2.2
 import org.asteroid.syncservice 1.0
 import QtQuick.Controls 2.15
 import Qt.labs.settings 1.0
+import QtQuick.Window 2.2
 import "pages"
 
-Page {
+ApplicationWindow {
     property alias curWatch: watches.currentWatch
     property alias curWatchConnected: watches.currentWatchConnected
     property string version: Qt.application.version;
@@ -31,7 +32,8 @@ Page {
     id: starship
     width: 320
     height: 480
-    focus: true
+    visibility: "AutomaticVisibility"
+    visible: true
 
     ServiceController {
         id: serviceController
@@ -40,20 +42,19 @@ Page {
     }
     Settings {
         id: settings
-        fileName: "/home/dodoradio/Projects/buran/settings.txt"
         property alias windowWidth: starship.width
         property alias windowHeight: starship.height
-        //Component.onCompleted: uiLoader.source = settings.value("uiStyle",1) ? "pages/MainMenuPageDesktop.qml" : "pages/MainMenuPageMobile.qml"
+        property alias windowX: starship.x
+        property alias windowY: starship.y
+        Component.onCompleted: uiLoader.setSource(settings.value("uiStyle", 1) <  0 ? "pages/RootUIDesktop.qml" : "pages/RootUIMobile.qml")
     }
 
     Loader {
         id: uiLoader
         anchors.fill: parent
-        source: false ? "pages/RootUIDesktop.qml" : "pages/RootUIMobile.qml"
         onLoaded: {
             item.anchors.fill = item.parent
             item.watch = getCurWatch()
-            //item.palette.window = "orange"
         }
     }
 
@@ -77,34 +78,19 @@ Page {
     }
 
     function initService() {
-        serviceController.startService();
         if (!watches.connectedToService && !serviceController.serviceRunning) {
+            console.log("asteroidsyncservice is not running. Attempting to start the service.")
             serviceController.startService();
         }
 
-/*        if (watches.version !== version) {
+        if (watches.version !== version) {
             console.log("Service file version (", version, ") is not equal running service version (", watches.version, "). Restarting service.");
             serviceController.restartService();
-        }*/
+        }
     }
 
     function restartService() {
         serviceController.restartService()
-    }
-
-    function loadStack() {
-        pageStack.clear();
-        console.log(watches.connectedToService,curWatch,watches)
-        if (watches.connectedToService) {
-            //if pageStack
-
-            if (!(curWatch  >= 0)) {
-                pageStack.push(Qt.resolvedUrl("pages/WatchSelectionPage.qml"), {watch: getCurWatch()})
-            }
-        } else {
-            pageStack.clear();
-            pageStack.push(Qt.resolvedUrl("pages/LoadingPage.qml"));
-        }
     }
 
     function getCurWatch() {

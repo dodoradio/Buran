@@ -109,10 +109,10 @@ Page {
                         onClicked: pageStack.push(Qt.resolvedUrl("UISettings.qml"))
                     }
                     Button {
-                        text: "About"
+                        text: "Service status"
                     }
                     Button {
-                        text: "Service status"
+                        text: "About"
                     }
                 }
             }

@@ -99,13 +99,19 @@ Page {
                 padding: 0
                 Column {
                     Button {
-                        text: "other stuff stuff stuff"
+                        text: "Watch Selection"
                         onClicked: pageStack.push(Qt.resolvedUrl("WatchSelectionPage.qml"))
                     }
                     Button {
 
                         text: "UI settings"
                         onClicked: pageStack.push(Qt.resolvedUrl("UISettings.qml"))
+                    }
+                    Button {
+                        text: "Service status"
+                    }
+                    Button {
+                        text: "About"
                     }
                 }
             }
