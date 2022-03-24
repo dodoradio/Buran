@@ -29,8 +29,8 @@ Page {
 
     id: root
     property var watch: null
-    property int batteryLevel: root.watch.batteryLevel
-    property int columns: 1
+//     property int batteryLevel: root.watch.batteryLevel
+//     property int columns: 1
 
     header: ToolBar {
         id: header
@@ -121,7 +121,6 @@ Page {
 
     Settings {
         id: settings
-        fileName: "/home/dodoradio/Projects/buran/settings.txt"
         property alias menuPanelWidth: mainMenuPanel.width
     }
 
@@ -139,7 +138,9 @@ Page {
             anchors.leftMargin: 0
             anchors.topMargin: 0
             implicitWidth: settings.menuPanelWidth
+            width: parent.width/6
             palette.window: "orange"
+            watch: watch
         }
             //Behavior on width { NumberAnimation { duration: 100 } }
         StackView {
@@ -174,19 +175,19 @@ Page {
         target: root.watch
         onTimeServiceReadyChanged: timeSync();
     }*/
-
+/*
     function timeSync() {
         if(root.watch.timeServiceReady && settings.timeSync) root.watch.setTime(Date())
-    }
+    }*/
 
     //Connections {
         //target: root.watch
         //onNotificationServiceReadyChanged: setVib();
     //}
-
+/*
     function setVib() {
         if(root.watch.notificationServiceReady) root.watch.setVibration(settings.notifyVib)
-    }
+    }*/
 
     //Component.onCompleted: root.watch.setScreenshotFileInfo("/home/phablet/.local/share/telescope.asteroidos/screenshot/'screenshot'ddMMyyyy_hhmmss'.jpg'");
 }
