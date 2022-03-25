@@ -2,6 +2,7 @@ import QtQuick 2.4
 import QtQuick.Controls 2.15
 
 Page {
+    //FIXME: major rework needed.
     id: notificationServiceItem
     anchors.fill: parent
 

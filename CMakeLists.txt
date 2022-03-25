@@ -4,5 +4,5 @@ configure_file(
     "buran_config.h.in"
     "buran_config.h"
 )
-add_subdirectory(harbour-starship)
+add_subdirectory(src)
 

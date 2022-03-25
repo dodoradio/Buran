@@ -1,0 +1,5 @@
+[General]
+menuPanelWidth=373.14285714285705
+uiStyle=0
+windowHeight=731
+windowWidth=407

@@ -20,7 +20,7 @@
 import QtQuick 2.2
 import QtQuick.Controls 2.15
 
-Page {
+Page { //FIXME: remove silica code and integrate back into app.
 
     SilicaFlickable {
         anchors.fill: parent

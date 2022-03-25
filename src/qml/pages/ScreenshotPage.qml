@@ -2,7 +2,7 @@ import QtQuick 2.4
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.15
 
-Pane {
+Pane { //FIXME: Very broken. Needs major rework.
     id: scrShot
     
     property var watch: null

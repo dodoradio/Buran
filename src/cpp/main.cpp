@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
     app.setApplicationName("Buran");
     app.setOrganizationDomain("asteroidos.org");
     app.setOrganizationName("AsteroidOS");
-    QQmlApplicationEngine engine(QUrl("../harbour-starship/qml/harbour-starship.qml"));
+    QQmlApplicationEngine engine(QUrl("../src/qml/main.qml"));
 
     return app.exec();
 }

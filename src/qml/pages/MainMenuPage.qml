@@ -17,70 +17,22 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+/* This page is loaded in by either RootUIDesktop or RootUIMobile.
+ * The two UI models handle this loading in different ways, the desktop UI presents it as a side panel, while
+ * the mobile UI loads it as a part of the page stack.
+ */
+
 import QtQuick 2.2
 import QtQuick.Layouts 1.1
 import QtGraphicalEffects 1.0
 import QtQuick.Controls 2.15
 
-//import "../components"
-
 Pane {
-    //anchors.fill: parent
     id: root
-    property var watch: null
-    property int batteryLevel: root.watch.batteryLevel
+    property var watch
+    property int batteryLevel: watch.batteryLevel
     property int columns: 1
 
-
-
-    //allowedOrientations: Orientation.All
-    /*header: ToolBar {
-        id: header
-        RowLayout{
-            id: statusRowLayout
-            //spacing: units.gu(4)
-            anchors.horizontalCenter: parent.horizontalCenter
-            //anchors.top: parent.bottom
-
-            RowLayout {
-                //spacing: units.gu(0.5)
-                //Layout.preferredHeight: units.gu(7)
-
-                Button { //shows an icon for whether watch is connected or not
-                    id: syncIcon
-                    //width: units.gu(4)
-                    //height: units.gu(4)
-                    //color: Suru.foregroundColor
-                    icon.name: /*watchConnected ? "network-bluetooth" :*/ /*"network-bluetooth-activated"
-                }
-
-                Label { //text whether watch is connected
-                    id: syncLabel
-                    text: curWatchConnected ? "connected" : "disconnected"
-                }
-            }
-
-            RowLayout {
-                //spacing: units.gu(0.5)
-
-                Button {
-                    id: batteryIcon
-                    //width: units.gu(4)
-                    //height: units.gu(3)
-                    //color: Suru.foregroundColor
-                    icon.name: "battery-good" //maybe change this so the icon changes with battery
-                }
-
-                Label {
-                id: batteryLabel
-                text: curWatchConnected ? batteryLevel + ("%") : "unknown"
-
-
-
-                }
-            }
-        }
-    }*/
         Flickable {
             id: mainMenuPanel
             contentHeight: layout.height
@@ -90,12 +42,9 @@ Pane {
             anchors.leftMargin: 0
             anchors.topMargin: 0
             anchors.fill: parent
-            //palette.window: "orange"
 
             Grid {
                 id: layout
-                //spacing: 10
-                //anchors.fill: parent
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.top: parent.top
@@ -397,15 +346,18 @@ Pane {
         if(root.watch.timeServiceReady && settings.timeSync) root.watch.setTime(Date())
     }
 
-    Connections {
-        target: root.watch
-        onNotificationServiceReadyChanged: setVib();
+    //Connections {
+        //target: root.watch
+        //onNotificationServiceReadyChanged: setVib();
+    //}
+    function onNotificationServiceReadyChanged() {
+        setVib();
     }
 
     function setVib() {
         if(root.watch.notificationServiceReady) root.watch.setVibration(settings.notifyVib)
     }
 
-    Component.onCompleted: root.watch.setScreenshotFileInfo("/home/phablet/.local/share/telescope.asteroidos/screenshot/'screenshot'ddMMyyyy_hhmmss'.jpg'");
+    //Component.onCompleted: root.watch.setScreenshotFileInfo("/home/phablet/.local/share/telescope.asteroidos/screenshot/'screenshot'ddMMyyyy_hhmmss'.jpg'");
 }
 

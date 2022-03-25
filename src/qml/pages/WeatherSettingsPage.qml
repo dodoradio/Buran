@@ -20,7 +20,7 @@
 import QtQuick 2.2
 import QtQuick.Controls 2.15
 
-Pane {
+Pane { //FIXME: quite broken. major rework needed.
     id: root
 
     property var watch: null

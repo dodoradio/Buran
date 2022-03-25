@@ -29,7 +29,7 @@ ApplicationWindow {
     property alias curWatchConnected: watches.currentWatchConnected
     property string version: Qt.application.version;
 
-    id: starship
+    id: buranWindow
     width: 320
     height: 480
     visibility: "AutomaticVisibility"
@@ -40,12 +40,13 @@ ApplicationWindow {
         Component.onCompleted: initService()
         Component.onDestruction: serviceController.stopService()
     }
+
     Settings {
         id: settings
-        property alias windowWidth: starship.width
-        property alias windowHeight: starship.height
-        property alias windowX: starship.x
-        property alias windowY: starship.y
+        property alias windowWidth: buranWindow.width
+        property alias windowHeight: buranWindow.height
+        property alias windowX: buranWindow.x
+        property alias windowY: buranWindow.y
         Component.onCompleted: uiLoader.setSource(settings.value("uiStyle", 1) < 1 ? "pages/RootUIDesktop.qml" : "pages/RootUIMobile.qml")
     }
 
@@ -57,9 +58,6 @@ ApplicationWindow {
             item.watch = getCurWatch()
         }
     }
-
-
-
 
     Watches {
         id: watches
@@ -73,12 +71,6 @@ ApplicationWindow {
 
     function loadStack() {
         uiLoader.item.loadStack()
-    }
-
-    function startBT() {
-        lipstick.typedCall("notifyLaunching",[{"type":"s","value":"jolla-settings.desktop"}],
-                           function(r){jolla.call("showPage",["system_settings/connectivity/bluetooth"])},
-                           function(e){console.log("Error",e)})
     }
 
     function initService() {
