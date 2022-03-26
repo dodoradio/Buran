@@ -31,7 +31,6 @@ import Qt.labs.settings 1.0
 Page {
 
     id: root
-    property var watch
     palette.window: "orange"
 
     header: ToolBar {
@@ -126,18 +125,17 @@ Page {
         pageStack.clear();
         console.log(watches.connectedToService,curWatch,watches)
         if (watches.connectedToService) {
-            pageStack.push(Qt.resolvedUrl("MainMenuPage.qml"), {watch: watch, columns: 2})
+            pageStack.push(Qt.resolvedUrl("MainMenuPage.qml"), {columns: 2})
             if (!(curWatch  >= 0)) {
-                pageStack.push(Qt.resolvedUrl("WatchSelectionPage.qml"), {watch: getCurWatch()})
+                pageStack.push(Qt.resolvedUrl("WatchSelectionPage.qml"))
             } else {
-                pageStack.push(Qt.resolvedUrl("MainMenuPage.qml"), {watch: getCurWatch(), columns: 2})
+                pageStack.push(Qt.resolvedUrl("MainMenuPage.qml"), {columns: 2})
             }
         } else {
             pageStack.clear();
             pageStack.push(Qt.resolvedUrl("LoadingPage.qml"));
         }
     }
-    onWatchChanged: pageStack.push(Qt.resolvedUrl("MainMenuPage.qml"), {watch: getCurWatch(), columns: 2})
     //Component.onCompleted: root.watch.setScreenshotFileInfo("/home/phablet/.local/share/telescope.asteroidos/screenshot/'screenshot'ddMMyyyy_hhmmss'.jpg'"); //TODO: change this to a path that's exists for the user and add a setting for this in UISettings.qml
 }
 
