@@ -31,7 +31,6 @@ import Qt.labs.settings 1.0
 Page {
 
     id: root
-    property var watch
 
     header: ToolBar {
         id: header
@@ -121,7 +120,6 @@ Page {
             implicitWidth: settings.menuPanelWidth
             width: parent.width/6
             palette.window: "orange"
-            watch: getCurWatch()
         }
 
         StackView {
@@ -135,7 +133,7 @@ Page {
         console.log(watches.connectedToService,curWatch,watches)
         if (watches.connectedToService) {
             if (!(curWatch  >= 0)) {
-                pageStack.push(Qt.resolvedUrl("WatchSelectionPage.qml"), {watch: getCurWatch()})
+                pageStack.push(Qt.resolvedUrl("WatchSelectionPage.qml"))
             }
         } else {
             pageStack.clear();
@@ -143,6 +141,6 @@ Page {
         }
     }
 
-    //Component.onCompleted: root.watch.setScreenshotFileInfo("/home/phablet/.local/share/telescope.asteroidos/screenshot/'screenshot'ddMMyyyy_hhmmss'.jpg'"); //TODO: change this to a path that's exists for the user and add a setting for this in UISettings.qml
+    //Component.onCompleted: watch.setScreenshotFileInfo("/home/phablet/.local/share/telescope.asteroidos/screenshot/'screenshot'ddMMyyyy_hhmmss'.jpg'"); //TODO: change this to a path that's exists for the user and add a setting for this in UISettings.qml
 }
 
