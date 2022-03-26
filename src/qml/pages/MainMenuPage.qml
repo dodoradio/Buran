@@ -26,12 +26,17 @@ import QtQuick 2.2
 import QtQuick.Layouts 1.1
 import QtGraphicalEffects 1.0
 import QtQuick.Controls 2.15
+import Qt.labs.settings 1.0
 
 Pane {
     id: root
-    property var watch
     property int batteryLevel: watch.batteryLevel
     property int columns: 1
+
+    Settings {
+        id: settings
+        property bool timeSync
+    }
 
         Flickable {
             id: mainMenuPanel
@@ -52,16 +57,16 @@ Pane {
                 //anchors.margins: Theme.paddingMedium
 
                 MouseArea { //time sync toggle
-                    enabled: root.watch.timeServiceReady
+                    enabled: watch && watch.timeServiceReady
                     id: timeSyncButton
                     width: parent.width/layout.columns
                     height: width
-                    property bool toggled: false  //change this to the value of timesync asap
+                    property bool toggled: settings.timeSync
 
                     onPressed: {
                         toggled = !toggled
-                        //settings.timeSync = toggled
-                        if(settings.timeSync == true) timeSync();
+                        settings.timeSync = toggled
+                        if(settings.timeSync == true) doTimeSync();
 
                     }
 
@@ -112,7 +117,7 @@ Pane {
                 }
 
                 MouseArea { //notification settings button
-                    enabled: root.watch.timeServiceReady
+                    enabled: watch && watch.timeServiceReady
                     id: notificationSettingsButton
                     width: parent.width/layout.columns
                     height: width
@@ -166,13 +171,13 @@ Pane {
                 }
 
                 MouseArea { //watch finder button
-                    enabled: root.watch.timeServiceReady
+                    enabled: watch && watch.timeServiceReady
                     id: watchFinderButton
                     width: parent.width/layout.columns
                     height: width
 
                     onClicked: {
-                        root.watch.sendNotify(Qt.formatDateTime(new Date(), "zzz"), qsTr("Telescope"), "ios-watch-vibrating", qsTr("Watch-Finder"), qsTr("The phone is looking for you!"))
+                        watch.sendNotify(Qt.formatDateTime(new Date(), "zzz"), qsTr("Telescope"), "ios-watch-vibrating", qsTr("Watch-Finder"), qsTr("The phone is looking for you!"))
                     }
 
                     Item {
@@ -220,14 +225,14 @@ Pane {
                 }
 
                 MouseArea { //screenshot button
-                    enabled: root.watch.screenshotServiceReady
+                    enabled: watch && watch.screenshotServiceReady
                     id: screenshotButton
                     width: parent.width/layout.columns
                     height: width
 
                     onClicked: {
-                            //root.watch.requestScreenshot()
-                            pageStack.replace("ScreenshotPage.qml", {watch: watch})
+                            //watch.requestScreenshot()
+                            pageStack.replace("ScreenshotPage.qml")
                     }
 
                     Item {
@@ -275,7 +280,7 @@ Pane {
                 }
 
                 MouseArea { //weather settings button
-                    enabled: root.watch.timeServiceReady
+                    enabled: watch && watch.timeServiceReady
                     id: weatherSettingsButton
                     width: parent.width/layout.columns
                     height: width
@@ -338,16 +343,16 @@ Pane {
     }*/
 
     Connections {
-        target: root.watch
-        onTimeServiceReadyChanged: timeSync();
+        target: watch
+        function onTimeServiceReadyChanged() { doTimeSync(); }
     }
 
-    function timeSync() {
-        if(root.watch.timeServiceReady && settings.timeSync) root.watch.setTime(Date())
+    function doTimeSync() {
+        if(watch.timeServiceReady && settings.timeSync) watch.setTime(Date())
     }
 
     //Connections {
-        //target: root.watch
+        //target: watch
         //onNotificationServiceReadyChanged: setVib();
     //}
     function onNotificationServiceReadyChanged() {
@@ -355,9 +360,9 @@ Pane {
     }
 
     function setVib() {
-        if(root.watch.notificationServiceReady) root.watch.setVibration(settings.notifyVib)
+        if(watch.notificationServiceReady) watch.setVibration(settings.notifyVib)
     }
 
-    //Component.onCompleted: root.watch.setScreenshotFileInfo("/home/phablet/.local/share/telescope.asteroidos/screenshot/'screenshot'ddMMyyyy_hhmmss'.jpg'");
+    //Component.onCompleted: watch.setScreenshotFileInfo("/home/phablet/.local/share/telescope.asteroidos/screenshot/'screenshot'ddMMyyyy_hhmmss'.jpg'");
 }
 

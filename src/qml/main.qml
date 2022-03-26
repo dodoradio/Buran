@@ -28,6 +28,7 @@ ApplicationWindow {
     property alias curWatch: watches.currentWatch
     property alias curWatchConnected: watches.currentWatchConnected
     property string version: Qt.application.version;
+    property Watch watch: getCurWatch()
 
     id: buranWindow
     width: 320
@@ -55,7 +56,6 @@ ApplicationWindow {
         anchors.fill: parent
         onLoaded: {
             item.anchors.fill = item.parent
-            item.watch = getCurWatch()
         }
     }
 
