@@ -93,5 +93,4 @@ ApplicationWindow {
         if(curWatch >= 0) return watches.get(curWatch);
         return null;
     }
-
 }

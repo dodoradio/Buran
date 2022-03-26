@@ -31,7 +31,7 @@ import Qt.labs.settings 1.0
 Page {
 
     id: root
-    property var watch: null
+    property var watch
 
     header: ToolBar {
         id: header
@@ -121,7 +121,7 @@ Page {
             implicitWidth: settings.menuPanelWidth
             width: parent.width/6
             palette.window: "orange"
-            watch: watch
+            watch: getCurWatch()
         }
 
         StackView {
@@ -135,7 +135,7 @@ Page {
         console.log(watches.connectedToService,curWatch,watches)
         if (watches.connectedToService) {
             if (!(curWatch  >= 0)) {
-                pageStack.push(Qt.resolvedUrl("WatchSelectionPage.qml"), {watch: watch})
+                pageStack.push(Qt.resolvedUrl("WatchSelectionPage.qml"), {watch: getCurWatch()})
             }
         } else {
             pageStack.clear();
