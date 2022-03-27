@@ -27,7 +27,13 @@ int main(int argc, char *argv[])
     app.setApplicationName("Buran");
     app.setOrganizationDomain("asteroidos.org");
     app.setOrganizationName("AsteroidOS");
+#ifdef DEBUG_BUILD
     QQmlApplicationEngine engine(QUrl("../src/qml/main.qml"));
+#else
+    QQmlApplicationEngine engine;
+    engine.addImportPath("qrc:/");
+    engine.load(QUrl("qrc:/qml/main.qml"));
+#endif
 
     return app.exec();
 }
