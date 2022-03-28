@@ -8,3 +8,4 @@ documentation.list
 *.swp
 /build**
 /asteroidsyncservice**
+**.directory
