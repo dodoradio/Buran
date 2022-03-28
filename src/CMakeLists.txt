@@ -23,4 +23,4 @@ target_include_directories(buran
         $<INSTALL_INTERFACE:.>
         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}>
 )
-install(TARGETS buran)
+install(TARGETS buran CONFIGURATIONS Release)
