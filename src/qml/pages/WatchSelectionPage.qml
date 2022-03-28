@@ -20,14 +20,11 @@
 import QtQuick 2.2
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.15
-import "../pullDownMenus"
 
 Page {
     ListView {
         anchors.fill: parent
         model: watches
-
-        StarshipPullDownMenu {}
 
         /*header: Rectangle {
             //title: qsTr("Starship")
