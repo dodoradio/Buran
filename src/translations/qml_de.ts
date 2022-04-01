@@ -24,12 +24,12 @@
     <message>
         <location filename="../qml/pages/MainMenuPage.qml" line="113"/>
         <source>enable time synchronisation</source>
-        <translation>Zeit Sync</translation>
+        <translation type="unfinished">Zeitsynchronisation aktivieren</translation>
     </message>
     <message>
         <location filename="../qml/pages/MainMenuPage.qml" line="168"/>
         <source>notification settings</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Benachrichtigungseinstellungen</translation>
     </message>
     <message>
         <location filename="../qml/pages/MainMenuPage.qml" line="179"/>
@@ -44,22 +44,22 @@
     <message>
         <location filename="../qml/pages/MainMenuPage.qml" line="179"/>
         <source>The phone is looking for you!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ihr Handy sucht Sie!</translation>
     </message>
     <message>
         <location filename="../qml/pages/MainMenuPage.qml" line="222"/>
         <source>find my watch</source>
-        <translation>Find mein Uhr</translation>
+        <translation type="unfinished">Finde meine Uhr</translation>
     </message>
     <message>
         <location filename="../qml/pages/MainMenuPage.qml" line="277"/>
         <source>take a screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">mache ein Bildschirmfoto</translation>
     </message>
     <message>
         <location filename="../qml/pages/MainMenuPage.qml" line="332"/>
         <source>weather settings</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Wettereinstellungen</translation>
     </message>
 </context>
 <context>
