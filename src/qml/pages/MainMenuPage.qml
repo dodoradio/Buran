@@ -110,7 +110,7 @@ Pane {
                         color: timeSyncButton.toggled ? "#444444" : "#666666"
                         //font.pixelSize: ((appsListView.width > appsListView.height ? appsListView.height : appsListView.width) / Dims.l(100)) * Dims.l(5)
                         font.weight: Font.Medium
-                        text: "enable time synchronisation"
+                        text: qsTr("enable time synchronisation")
                         wrapMode: Text.Wrap
                     }
                 }
@@ -165,7 +165,7 @@ Pane {
                         color: notificationSettingsButton.pressed ? "#444444" : "#666666"
                         //font.pixelSize: ((appsListView.width > appsListView.height ? appsListView.height : appsListView.width) / Dims.l(100)) * Dims.l(5)
                         font.weight: Font.Medium
-                        text: "notification settings"
+                        text: qsTr("notification settings")
                     }
                 }
 
@@ -219,7 +219,7 @@ Pane {
                         color: watchFinderButton.pressed ? "#444444" : "#666666"
                         //font.pixelSize: ((appsListView.width > appsListView.height ? appsListView.height : appsListView.width) / Dims.l(100)) * Dims.l(5)
                         font.weight: Font.Medium
-                        text: "find my watch"
+                        text: qsTr("find my watch")
                     }
                 }
 
@@ -274,7 +274,7 @@ Pane {
                         color: watchFinderButton.pressed ? "#444444" : "#666666"
                         //font.pixelSize: ((appsListView.width > appsListView.height ? appsListView.height : appsListView.width) / Dims.l(100)) * Dims.l(5)
                         font.weight: Font.Medium
-                        text: "take a screenshot"
+                        text: qsTr("take a screenshot")
                     }
                 }
 
@@ -329,7 +329,7 @@ Pane {
                         color: weatherSettingsButton.pressed ? "#444444" : "#666666"
                         //font.pixelSize: ((appsListView.width > appsListView.height ? appsListView.height : appsListView.width) / Dims.l(100)) * Dims.l(5)
                         font.weight: Font.Medium
-                        text: "weather settings"
+                        text: qsTr("weather settings")
                     }
                 }
             }
