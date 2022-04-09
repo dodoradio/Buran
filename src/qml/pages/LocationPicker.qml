@@ -1,13 +1,11 @@
 /*
- * Copyright (C) 2018 - Florent Revest <revestflo@gmail.com>
- *               2016 - Andrew Branson <andrew.branson@jollamobile.com>
- *                      Ruslan N. Marchenko <me@ruff.mobi>
+ * Copyright (C) 2022 - Ed Beroset <github.com/beroset>
+ * All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
-import Sailfish.Silica 1.0
- * (at your option) any later version.
+ * it under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation, either version 2.1 of the
+ * License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -20,111 +18,85 @@ import Sailfish.Silica 1.0
 
 import QtQuick 2.2
 import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.15
+import QtPositioning 5.15
+import QtLocation 5.15
 
-Dialog {
-    id: pickerPage
-    property var selected: null
+Pane {
+    id: root
+    signal activated(string placename, real lat, real lon)
+    property alias placename: thisplacename.text
+    property alias lat: myMap.center.latitude
+    property alias lon: myMap.center.longitude
 
-    Column {
-        anchors.fill: parent
-        width: parent.width
-        /*Header {
-            title: qsTr("Select Location")
-            defaultAcceptText: ""
-            defaultCancelText: qsTr("Cancel")
+    Plugin {
+        id: mapPlugin
+        name: "osm"
+        PluginParameter {
+            name: "osm.mapping.providersrepository.disabled"
+            value: "true"
         }
-        TextField {
-            width: parent.width
-            label: qsTr("Location Name")
-            placeholderText: qsTr("Type in location name")
-            onTextChanged: getHints(text)
-        }*/
-
-        ListModel {
-            id: locModel
-        }
-
-        ListView {
-            id: locPicker
-            width: parent.width
-            height: contentItem.childrenRect.height
-
-            /*ViewPlaceholder {
-                enabled: locModel.count === 0
-                text: qsTr("Matching locations will be appearing as you type")
-            }*/
-
-            model: locModel
-            delegate: ListElement {
-                id: liLoc
-                anchors.horizontalCenter: parent.horizontalCenter
-                //width: locPicker.width-Theme.paddingSmall
-                //contentHeight: Theme.itemSizeSmall
-                Label {
-                    anchors.left: parent.left
-                    anchors.verticalCenter: parent.verticalCenter
-                    text: model.name
-                }
-                Column {
-                    anchors.right: parent.right
-                    anchors.top: parent.top
-                    width: parent.width/4
-                    Row {
-                        Label {
-                            text: "LAT: "
-                            horizontalAlignment: Text.AlignRight
-                        }
-                        Label {
-                            text: model.lat
-                        }
-                    }
-                    Row {
-                        Label {
-                            text: "LON: "
-                            //font.pixelSize: Theme.fontSizeTiny
-                            horizontalAlignment: Text.AlignRight
-                        }
-                        Label {
-                            text: model.lng
-                            //font.pixelSize: Theme.fontSizeTiny
-                        }
-                    }
-                }
-                onClicked: {
-                    selected = model;
-                    pickerPage.canAccept=true;
-                    pickerPage.accept();
-                }
-            }
+        PluginParameter {
+            name: "osm.mapping.providersrepository.address"
+            value: "http://maps-redirect.qt.io/osm/5.15/"
         }
     }
+    Column {
+        anchors.fill: parent
 
-    function getHints(blah) {
-        if(blah && blah.length === 0) return;
-        var url = "http://autocomplete.wunderground.com/aq?query="+blah;
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET",url);
-        xhr.onreadystatechange = function() {
-            if(xhr.readyState === xhr.DONE) {
-                if(xhr.status === 200) {
-                    var json = JSON.parse(xhr.responseText);
-                    if(json.hasOwnProperty("RESULTS") && json.RESULTS.length > 0) {
-                        locModel.clear();
-
-                        for(var i=0;i<json.RESULTS.length;i++) {
-                            var loc = json.RESULTS[i];
-
-                            if(loc.type !== "city") {
-                                continue;
-                            }
-
-                            locModel.append({"name":loc.name,"lat":loc.lat,"lng":loc.lon});
-                        }
-                    } else if(!json.hasOwnProperty("RESULTS"))
-                        console.log("WTF",json,xhr.responseText);
+        GridLayout {
+            id: select
+            columns: 2
+            Button {
+                width: parent.width
+                text: qsTr("Select location")
+                onClicked: {
+                    console.warn("Location:", myMap.center)
+                    activated(placename, lat, lon)
+                    pageStack.pop()
                 }
             }
-        };
-        xhr.send();
+            Button {
+                text: qsTr("Cancel")
+                onClicked: pageStack.pop()
+            }
+            TextField {
+                id: latfield
+                text: lat
+                inputMethodHints: Qt.ImhFormattedNumbersOnly
+                onEditingFinished: { myMap.center.latitude = parseFloat(text) }
+            }
+            TextField {
+                id: lonfield
+                text: lon
+                inputMethodHints: Qt.ImhFormattedNumbersOnly
+                onEditingFinished: { myMap.center.longitude = parseFloat(text) }
+            }
+            Label {
+                text: qsTr("Name:")
+            }
+            TextField {
+                id: thisplacename
+            }
+            Label {  // just to have a little space above the map
+            }
+        }
+
+        Map {
+            id: myMap
+            width: parent.width
+            height: parent.height - select.height - 20
+            plugin: mapPlugin
+            center: QtPositioning.coordinate(lat,lon)
+
+            Rectangle {
+                anchors.centerIn: parent
+                height: 10
+                width: 10
+                radius: 5
+                border.color: "green"
+                color: "transparent"
+            }
+        }
     }
 }
