@@ -27,6 +27,7 @@ int main(int argc, char *argv[])
     app.setApplicationName("Buran");
     app.setOrganizationDomain("asteroidos.org");
     app.setOrganizationName("AsteroidOS");
+    app.setApplicationVersion(VERSION);
 #ifdef DEBUG_BUILD
     QQmlApplicationEngine engine(QUrl("../src/qml/main.qml"));
 #else
