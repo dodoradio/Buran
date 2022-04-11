@@ -100,6 +100,7 @@ Page {
                     }
                     Button {
                         text: "About"
+                        onClicked: pageStack.push(Qt.resolvedUrl("InfoPage.qml"))
                     }
                 }
             }

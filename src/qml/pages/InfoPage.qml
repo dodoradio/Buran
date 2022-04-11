@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2018 - Florent Revest <revestflo@gmail.com>
+ * Copyright (C) 2022 - Arseniy Movshev <dodoradio@outlook.com>
+ *               2018 - Florent Revest <revestflo@gmail.com>
  *               2016 - Andrew Branson <andrew.branson@jollamobile.com>
  *                      Ruslan N. Marchenko <me@ruff.mobi>
  *
@@ -20,69 +21,77 @@
 import QtQuick 2.2
 import QtQuick.Controls 2.15
 
-Page { //FIXME: remove silica code and integrate back into app.
-
-    SilicaFlickable {
+Image {
+    id: root
+    //anchors.fill: parent
+    //height: 200
+    fillMode: Image.PreserveAspectCrop
+    source: "../img/harbour-starship.svg" //TODO: replace this with a proper image
+    Flickable {
+        id: scrollPanel
         anchors.fill: parent
-        contentHeight: contentColumn.height + Theme.paddingSmall
-        anchors.margins: Theme.paddingLarge
+        contentHeight: column.height + parent.height/2
+        //anchors.margins: Theme.paddingLarge
 
-        Column {
-            id: contentColumn
-            width: parent.width
-            height: childrenRect.height
-            spacing: Theme.paddingLarge
+        //Column {
+            //anchors.fill: parent
 
-            PageHeader {
-                title: qsTr("About Starship")
-            }
-
-            Row {
+            Rectangle {
+                id: contentPanel
                 width: parent.width
-                spacing: Theme.paddingLarge
-                anchors.margins: Theme.paddingLarge
-
+                //height: childrenRect.height
+                //height: column.implicitHeight - root.height/2
+                y: root.height/2
+                height: parent.height
                 Image {
+                    id: logo
                     source: "../img/harbour-starship.svg"
-                    height: Theme.iconSizeLarge
+                    //height: Theme.iconSizeLarge
                     width: height
+                    anchors.verticalCenter: parent.top
+                    anchors.horizontalCenter: parent.horizontalCenter
                 }
+                Column {
+                    id: column
+                    anchors.top: logo.bottom
+                    width: parent.width
+                    Label {
+                        width: parent.width
+                        text: qsTr("Version %1").arg(version)
+                        //color: Theme.highlightColor
+                        //font.pixelSize: Theme.fontSizeLarge
+                        horizontalAlignment: Text.AlignHCenter
+                    }
 
-                Label {
-                    text: qsTr("Version %1").arg(version)
-                    color: Theme.highlightColor
-                    font.pixelSize: Theme.fontSizeLarge
+                    Label {
+                        width: parent.width
+                        text: qsTr("Legal")
+                        //color: Theme.highlightColor
+                        font.bold: true
+                        horizontalAlignment: Text.AlignHCenter
+                    }
+
+                    Label {
+                        //anchors.top: column.bottom
+                        //anchors.horizontalCenter: parent.horizontalCenter
+                        width: parent.width*0.8
+                        leftPadding: parent.width/10
+                        //font.pixelSize: Theme.fontSizeSmall
+                        //color: Theme.highlightColor
+                        text: "This program is free software: you can redistribute it and/or modify "
+                            + "it under the terms of the GNU General Public License as published "
+                            + "by the Free Software Foundation, version 3 of the License.<br>"
+                            + "This program is distributed in the hope that it will be useful, "
+                            + "but WITHOUT ANY WARRANTY; without even the implied warranty of "
+                            + "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the "
+                            + "GNU General Public License for more details.<br>"
+                            + "You should have received a copy of the GNU General Public License "
+                            + "along with this program.  If not, see <a href=\"http://www.gnu.org/"
+                            + "licenses/\">http://www.gnu.org/licenses</a>."
+                        wrapMode: Text.WordWrap
+                    }
                 }
-            }
-
-            Separator {
-                width: parent.width
-                color: Theme.secondaryHighlightColor
-            }
-
-            Label {
-                width: parent.width
-                text: qsTr("Legal")
-                color: Theme.highlightColor
-                font.bold: true
-            }
-
-            Label {
-                width: parent.width
-                font.pixelSize: Theme.fontSizeSmall
-                color: Theme.highlightColor
-                text: "This program is free software: you can redistribute it and/or modify "
-                      + "it under the terms of the GNU General Public License as published "
-                      + "by the Free Software Foundation, version 3 of the License.<br>"
-                      + "This program is distributed in the hope that it will be useful, "
-                      + "but WITHOUT ANY WARRANTY; without even the implied warranty of "
-                      + "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the "
-                      + "GNU General Public License for more details.<br>"
-                      + "You should have received a copy of the GNU General Public License "
-                      + "along with this program.  If not, see <a href=\"http://www.gnu.org/"
-                      + "licenses/\">http://www.gnu.org/licenses</a>."
-                wrapMode: Text.WordWrap
-            }
+            //}
         }
     }
 }
