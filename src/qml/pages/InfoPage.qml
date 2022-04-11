@@ -57,7 +57,7 @@ Image {
                     width: parent.width
                     Label {
                         width: parent.width
-                        text: qsTr("Version %1").arg(version)
+                        text: qsTr("Version %1").arg(Qt.application.version)
                         //color: Theme.highlightColor
                         //font.pixelSize: Theme.fontSizeLarge
                         horizontalAlignment: Text.AlignHCenter
