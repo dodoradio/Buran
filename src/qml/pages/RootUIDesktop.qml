@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2018 - Florent Revest <revestflo@gmail.com>
+ * Copyright (C) 2022 - Arseniy Movshev <dodoradio@outlook.com>
+ *               2018 - Florent Revest <revestflo@gmail.com>
  *               2016 - Andrew Branson <andrew.branson@jollamobile.com>
  *                      Ruslan N. Marchenko <me@ruff.mobi>
  *
@@ -35,8 +36,10 @@ Page {
     header: ToolBar {
         id: header
         width: parent.width
+        height: 40 //TODO: change this from a static value
         Row{
             id: statusRowLayout
+            height: parent.height
 
             Image { //shows an icon for whether watch is connected or not
                 id: syncIcon
@@ -52,11 +55,11 @@ Page {
                 verticalAlignment: Text.AlignVCenter
             }
 
-            Button {
+            Image {
                 id: batteryIcon
-                width: height
-                icon.name: "battery-good" //maybe change this so the icon changes with battery
-                onPressed: console.log(pageStack.currentItem, pageStack.depth)
+                height: parent.height
+                width: parent.height
+                source: "../img/ios-battery-full.svg" //maybe change this so the icon changes with battery
             }
 
             Label {
