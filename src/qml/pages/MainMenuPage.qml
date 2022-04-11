@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2018 - Florent Revest <revestflo@gmail.com>
+ * Copyright (C) 2022 - Arseniy Movshev <dodoradio@outlook.com>
+ *               2018 - Florent Revest <revestflo@gmail.com>
  *               2016 - Andrew Branson <andrew.branson@jollamobile.com>
  *                      Ruslan N. Marchenko <me@ruff.mobi>
  *
@@ -27,6 +28,7 @@ import QtQuick.Layouts 1.1
 import QtGraphicalEffects 1.0
 import QtQuick.Controls 2.15
 import Qt.labs.settings 1.0
+import "../components/"
 
 Pane {
     id: root
@@ -55,282 +57,60 @@ Pane {
                 columns: root.columns
                 //anchors.margins: Theme.paddingMedium
 
-                MouseArea { //time sync toggle
+                IconButton { //time sync toggle
                     enabled: watch && watch.timeServiceReady
-                    id: timeSyncButton
                     width: parent.width/layout.columns
-                    height: width
                     property bool toggled: settings.timeSync
-
                     onPressed: {
                         toggled = !toggled
                         settings.timeSync = toggled
                         if(settings.timeSync == true) doTimeSync();
 
                     }
-
-                    Item {
-                        anchors.fill: parent
-                        Rectangle {
-                            id: timeSyncCircle
-                            anchors.centerIn: parent
-                            width: parent.width * 0.7
-                            height: width
-                            radius: width/2
-                            color: timeSyncButton.toggled ? "#cccccc" : "#f4f4f4"
-                        }
-                    }
-                    /*DropShadow {
-                        anchors.fill: circleWrapper
-                        horizontalOffset: 0
-                        verticalOffset: 0
-                        radius: 8.0
-                        samples: 12
-                        color: "#80000000"
-                        source: circleWrapper
-                        cached: true
-                    }*/
-
-                    Image {
-                        id: timeSyncIcon
-                        anchors.centerIn: parent
-                        anchors.verticalCenterOffset: -parent.height * 0.03
-                        width: parent.width * 0.31
-                        height: width
-                        //color: launcherItem.pressed | fakePressed ? "#444444" : "#666666"
-                        source: Qt.resolvedUrl("../img/time-sync.svg")
-                    }
-
-                    Label {
-                        anchors.top: timeSyncIcon.bottom
-                        width: parent.width * 0.5
-                        horizontalAlignment: Text.AlignHCenter
-                        anchors.topMargin: parent.height * 0.04
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        color: timeSyncButton.toggled ? "#444444" : "#666666"
-                        //font.pixelSize: ((appsListView.width > appsListView.height ? appsListView.height : appsListView.width) / Dims.l(100)) * Dims.l(5)
-                        font.weight: Font.Medium
-                        text: qsTr("enable time synchronisation")
-                        wrapMode: Text.Wrap
-                    }
+                    text: qsTr("Enable time synchronisation")
+                    imageSource: Qt.resolvedUrl("../img/time-sync.svg")
+                    state: toggled
                 }
 
-                MouseArea { //notification settings button
+                IconButton { //notification settings button
                     enabled: watch && watch.timeServiceReady
-                    id: notificationSettingsButton
                     width: parent.width/layout.columns
-                    height: width
-
                     onClicked: {
                         pageStack.replace(Qt.resolvedUrl("NotificationSettingsPage.qml"))
                     }
-
-                    Item {
-                        anchors.fill: parent
-                        Rectangle {
-                            anchors.centerIn: parent
-                            width: parent.width * 0.7
-                            height: width
-                            radius: width/2
-                            color: notificationSettingsButton.pressed ? "#cccccc" : "#f4f4f4"
-                        }
-                    }
-                    /*DropShadow {
-                        anchors.fill: circleWrapper
-                        horizontalOffset: 0
-                        verticalOffset: 0
-                        radius: 8.0
-                        samples: 12
-                        color: "#80000000"
-                        source: circleWrapper
-                        cached: true
-                    }*/
-
-                    Image {
-                        id: notificationSettingsIcon
-                        anchors.centerIn: parent
-                        anchors.verticalCenterOffset: -parent.height * 0.03
-                        width: parent.width * 0.31
-                        height: width
-                        //color: launcherItem.pressed | fakePressed ? "#444444" : "#666666"
-                        source: Qt.resolvedUrl("../img/ios-notifications-outline.svg")
-                    }
-
-                    Label {
-                        anchors.top: notificationSettingsIcon.bottom
-                        width: parent.width * 0.5
-                        horizontalAlignment: Text.AlignHCenter
-                        anchors.topMargin: parent.height * 0.04
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        color: notificationSettingsButton.pressed ? "#444444" : "#666666"
-                        //font.pixelSize: ((appsListView.width > appsListView.height ? appsListView.height : appsListView.width) / Dims.l(100)) * Dims.l(5)
-                        font.weight: Font.Medium
-                        text: qsTr("notification settings")
-                    }
+                    imageSource: Qt.resolvedUrl("../img/ios-notifications-outline.svg")
+                    text: qsTr("Notification settings")
                 }
 
-                MouseArea { //watch finder button
-                    enabled: watch && watch.timeServiceReady
-                    id: watchFinderButton
+                IconButton { //watch finder button
+                    enabled: watch && watch.screenshotServiceReady
                     width: parent.width/layout.columns
-                    height: width
-
                     onClicked: {
                         watch.sendNotify(Qt.formatDateTime(new Date(), "zzz"), qsTr("Telescope"), "ios-watch-vibrating", qsTr("Watch-Finder"), qsTr("The phone is looking for you!"))
                     }
-
-                    Item {
-                        anchors.fill: parent
-                        Rectangle {
-                            anchors.centerIn: parent
-                            width: parent.width * 0.7
-                            height: width
-                            radius: width/2
-                            color: watchFinderButton.pressed ? "#cccccc" : "#f4f4f4"
-                        }
-                    }
-                    /*DropShadow {
-                        anchors.fill: circleWrapper
-                        horizontalOffset: 0
-                        verticalOffset: 0
-                        radius: 8.0
-                        samples: 12
-                        color: "#80000000"
-                        source: circleWrapper
-                        cached: true
-                    }*/
-
-                    Image {
-                        id: watchFinderIcon
-                        anchors.centerIn: parent
-                        anchors.verticalCenterOffset: -parent.height * 0.03
-                        width: parent.width * 0.31
-                        height: width
-                        //color: launcherItem.pressed | fakePressed ? "#444444" : "#666666"
-                        source: Qt.resolvedUrl("../img/ios-watch-vibrating.svg")
-                    }
-
-                    Label {
-                        anchors.top: watchFinderIcon.bottom
-                        width: parent.width * 0.5
-                        horizontalAlignment: Text.AlignHCenter
-                        anchors.topMargin: parent.height * 0.04
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        color: watchFinderButton.pressed ? "#444444" : "#666666"
-                        //font.pixelSize: ((appsListView.width > appsListView.height ? appsListView.height : appsListView.width) / Dims.l(100)) * Dims.l(5)
-                        font.weight: Font.Medium
-                        text: qsTr("find my watch")
-                    }
+                    imageSource: Qt.resolvedUrl("../img/ios-watch-vibrating.svg")
+                    text: qsTr("Find my watch!")
                 }
 
-                MouseArea { //screenshot button
-                    enabled: watch && watch.screenshotServiceReady
-                    id: screenshotButton
+                IconButton { //screenshot button
+                    enabled: watch && watch.timeServiceReady
                     width: parent.width/layout.columns
-                    height: width
-
                     onClicked: {
                             //watch.requestScreenshot()
                             pageStack.replace("ScreenshotPage.qml")
                     }
-
-                    Item {
-                        anchors.fill: parent
-                        Rectangle {
-                            anchors.centerIn: parent
-                            width: parent.width * 0.7
-                            height: width
-                            radius: width/2
-                            color: screenshotButton.pressed ? "#cccccc" : "#f4f4f4"
-                        }
-                    }
-                    /*DropShadow {
-                        anchors.fill: circleWrapper
-                        horizontalOffset: 0
-                        verticalOffset: 0
-                        radius: 8.0
-                        samples: 12
-                        color: "#80000000"
-                        source: circleWrapper
-                        cached: true
-                    }*/
-
-                    Image {
-                        id: screenshotIcon
-                        anchors.centerIn: parent
-                        anchors.verticalCenterOffset: -parent.height * 0.03
-                        width: parent.width * 0.31
-                        height: width
-                        //color: launcherItem.pressed | fakePressed ? "#444444" : "#666666"
-                        source: Qt.resolvedUrl("../img/md-images.svg")
-                    }
-
-                    Label {
-                        anchors.top: screenshotIcon.bottom
-                        width: parent.width * 0.5
-                        horizontalAlignment: Text.AlignHCenter
-                        anchors.topMargin: parent.height * 0.04
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        color: watchFinderButton.pressed ? "#444444" : "#666666"
-                        //font.pixelSize: ((appsListView.width > appsListView.height ? appsListView.height : appsListView.width) / Dims.l(100)) * Dims.l(5)
-                        font.weight: Font.Medium
-                        text: qsTr("take a screenshot")
-                    }
+                    imageSource: Qt.resolvedUrl("../img/md-images.svg")
+                    text: qsTr("Take a screenshot")
                 }
 
-                MouseArea { //weather settings button
+                IconButton { //weather settings button
                     enabled: watch && watch.timeServiceReady
-                    id: weatherSettingsButton
                     width: parent.width/layout.columns
-                    height: width
-
                     onClicked: {
                         pageStack.replace(Qt.resolvedUrl("WeatherSettingsPage.qml"))
-
                     }
-
-                    Item {
-                        anchors.fill: parent
-                        Rectangle {
-                            anchors.centerIn: parent
-                            width: parent.width * 0.7
-                            height: width
-                            radius: width/2
-                            color: weatherSettingsButton.pressed ? "#cccccc" : "#f4f4f4"
-                        }
-                    }
-                    /*DropShadow {
-                        anchors.fill: circleWrapper
-                        horizontalOffset: 0
-                        verticalOffset: 0
-                        radius: 8.0
-                        samples: 12
-                        color: "#80000000"
-                        source: circleWrapper
-                        cached: true
-                    }*/
-
-                    Image {
-                        id: weatherSettingsIcon
-                        anchors.centerIn: parent
-                        anchors.verticalCenterOffset: -parent.height * 0.03
-                        width: parent.width * 0.31
-                        height: width
-                        //color: launcherItem.pressed | fakePressed ? "#444444" : "#666666"
-                        source: Qt.resolvedUrl("../img/ios-partly-sunny-outline.svg")
-                    }
-
-                    Label {
-                        anchors.top: weatherSettingsIcon.bottom
-                        width: parent.width * 0.5
-                        horizontalAlignment: Text.AlignHCenter
-                        anchors.topMargin: parent.height * 0.04
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        color: weatherSettingsButton.pressed ? "#444444" : "#666666"
-                        //font.pixelSize: ((appsListView.width > appsListView.height ? appsListView.height : appsListView.width) / Dims.l(100)) * Dims.l(5)
-                        font.weight: Font.Medium
-                        text: qsTr("weather settings")
-                    }
+                    imageSource: Qt.resolvedUrl("../img/ios-partly-sunny-outline.svg")
+                    text: qsTr("Weather settings")
                 }
             }
         }
