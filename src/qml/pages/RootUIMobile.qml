@@ -54,10 +54,11 @@ Page {
                 source: curWatchConnected ? Qt.resolvedUrl("../img/ios-bluetooth-connected.svg") : Qt.resolvedUrl("../img/ios-bluetooth.svg")
             }
 
-            Label { //text whether watch is connected //FIXME: misaligned text
-                height: parent.height
+            Label { //text whether watch is connected
                 id: syncLabel
+                height: parent.height
                 text: curWatchConnected ? "connected" : "disconnected"
+                verticalAlignment: Text.AlignVCenter
             }
 
             Button {
@@ -67,9 +68,11 @@ Page {
                 onPressed: console.log(pageStack.currentItem, pageStack.depth)
             }
 
-            Label { //FIXME: misaligned text
+            Label {
                 id: batteryLabel
+                height: parent.height
                 text: curWatchConnected ? watch.batteryLevel + ("%") : "unknown"
+                verticalAlignment: Text.AlignVCenter
             }
         }
 
