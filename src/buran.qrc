@@ -1,6 +1,7 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
     <file>qml/main.qml</file>
+    <file>qml/components/IconButton.qml</file>
     <file>qml/pages/InfoPage.qml</file>
     <file>qml/pages/LoadingPage.qml</file>
     <file>qml/pages/LocationPicker.qml</file>
@@ -13,6 +14,7 @@
     <file>qml/pages/WatchSelectionPage.qml</file>
     <file>qml/pages/WeatherSettingsPage.qml</file>
     <!-- icons -->
+    <file>qml/img/ios-battery-full.svg</file>
     <file>qml/img/ios-bluetooth.svg</file>
     <file>qml/img/ios-bluetooth-connected.svg</file>
     <file>qml/img/ios-partly-sunny-outline.svg</file>
@@ -24,4 +26,4 @@
     <file>qml/img/time-sync.svg</file>
     <!-- menus -->
 </qresource>
-</RCC> 
+</RCC>
