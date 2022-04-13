@@ -29,8 +29,10 @@ Pane {
     property int locationPrecision: 4
 
     Settings {
-        category: "Locations"
+        id: settings
+        category: "Weather"
         property alias savedlocations: weatherSettings.savedlocations
+        property string apikey: "36cc791575eef0fc1a4560ac24475dad"
     }
     Component {
         id: dragDelegate
@@ -46,11 +48,9 @@ Pane {
             drag.axis: Drag.YAxis
 
             onPressAndHold: {
-                console.debug("held = true")
                 held = true
             }
             onReleased: {
-                console.debug("held = false")
                 held = false
             }
 
@@ -188,7 +188,7 @@ Pane {
         onClicked: {
             watch.setWeatherCityName(locations.get(0).name)
             console.log("getting weather for ", locations.get(0).lat, ", ", locations.get(0).lng);
-            getWeatherForecast(locations.get(0).lat, locations.get(0).lng)
+            getWeatherForecast(locations.get(0).lat, locations.get(0).lng, settings.apikey)
         }
     }
 
@@ -210,16 +210,15 @@ Pane {
         savedlocations = JSON.stringify(datamodel)
     }
 
-    function getWeatherForecast(lat, lon) {
+    function getWeatherForecast(lat, lon, apikey) {
         const xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (xhttp.readyState == XMLHttpRequest.DONE && xhttp.status == 200) {
                 updateForecast(xhttp.responseText.toString());
             }
         };
-        var APIkey = "36cc791575eef0fc1a4560ac24475dad";
         var omit = "current,minutely,hourly,alerts";
-        var url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=${omit}&appid=${APIkey}`;
+        var url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=${omit}&appid=${apikey}`;
         console.log("url: ", url);
         xhttp.open("GET", url);
         xhttp.send();
