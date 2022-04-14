@@ -18,6 +18,8 @@
  */
 
 #include "buran_config.h"
+#include <QHostInfo>
+#include <QQmlContext>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
@@ -28,10 +30,11 @@ int main(int argc, char *argv[])
     app.setOrganizationDomain("asteroidos.org");
     app.setOrganizationName("AsteroidOS");
     app.setApplicationVersion(VERSION);
-#ifdef DEBUG_BUILD
-    QQmlApplicationEngine engine(QUrl("../src/qml/main.qml"));
-#else
     QQmlApplicationEngine engine;
+    engine.rootContext()->setContextProperty("localHostName", QHostInfo::localHostName());
+#ifdef DEBUG_BUILD
+    engine.load(QUrl("../src/qml/main.qml"));
+#else
     engine.addImportPath("qrc:/");
     engine.load(QUrl("qrc:/qml/main.qml"));
 #endif
