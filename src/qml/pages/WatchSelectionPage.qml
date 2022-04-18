@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2018 - Florent Revest <revestflo@gmail.com>
+ * Copyright (C) 2022 - Arseniy Movshev <dodoradio@outlook.com>
+ *               2018 - Florent Revest <revestflo@gmail.com>
  *               2016 - Andrew Branson <andrew.branson@jollamobile.com>
  *                      Ruslan N. Marchenko <me@ruff.mobi>
  *
@@ -34,6 +35,7 @@ Page {
         delegate: Button {
             enabled: watches.count !== 0
             width: parent.width
+            down: index == curWatch
 
             Row {
                 width: parent.width
@@ -56,7 +58,10 @@ Page {
                 }
             }
 
-            onClicked: watches.selectWatch(index)
+            onClicked: {
+                watches.selectWatch(index)
+                loadStack()
+            }
         }
 
         Rectangle {
@@ -65,7 +70,7 @@ Page {
 
             Label {
                 id: noWatchLabel
-                text: qsTr(watches.count + "No smartwatches configured yet. Please connect your smartwatch using System Settings.")
+                text: qsTr("No smartwatches configured yet. Please connect your smartwatch using System Settings.")
                 //font.pixelSize: Theme.fontSizeLarge
                 //width: parent.width-(Theme.paddingSmall*2)
                 anchors.centerIn: parent
@@ -74,13 +79,13 @@ Page {
                 wrapMode: Text.WordWrap
             }
 
-            Button {
-                text: qsTr("Open Bluetooth Settings")
-                anchors.horizontalCenter: parent.horizontalCenter
-                //anchors.topMargin: Theme.paddingLarge
-                anchors.top: noWatchLabel.bottom
-                onClicked: starship.startBT()
-            }
+            //Button {
+                //text: qsTr("Open Bluetooth Settings")
+                //anchors.horizontalCenter: parent.horizontalCenter
+                ////anchors.topMargin: Theme.paddingLarge
+                //anchors.top: noWatchLabel.bottom
+                //onClicked: starship.startBT()
+            //}
         }
     }
 }
