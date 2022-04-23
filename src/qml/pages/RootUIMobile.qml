@@ -32,7 +32,7 @@ import Qt.labs.settings 1.0
 Page {
 
     id: root
-    palette.window: "orange"
+    palette.window: settings.value("uiAccentColor","orange")
 
     header: ToolBar {
         id: header
@@ -68,13 +68,15 @@ Page {
                 height: parent.height
                 width: parent.height
                 source: "../img/ios-battery-full.svg" //maybe change this so the icon changes with battery
-            }
-
-            Label {
-                id: batteryLabel
-                height: parent.height
-                text: curWatchConnected ? watch.batteryLevel + ("%") : "unknown"
-                verticalAlignment: Text.AlignVCenter
+                Label {
+                    anchors.centerIn: parent
+                    id: batteryLabel
+                    height: parent.height
+                    text: curWatchConnected ? watch.batteryLevel + ("%") : null
+                    verticalAlignment: Text.AlignVCenter
+                    color: "white"
+                    font.pixelSize: 9
+                }
             }
         }
 
@@ -103,8 +105,8 @@ Page {
 
                     Button {
 
-                        text: "UI settings"
-                        onClicked: pageStack.push(Qt.resolvedUrl("UISettings.qml"))
+                        text: "App settings"
+                        onClicked: pageStack.push(Qt.resolvedUrl("AppSettings.qml"))
                     }
 
                     Button {

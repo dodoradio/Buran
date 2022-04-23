@@ -51,7 +51,7 @@ Page {
             Label { //text whether watch is connected
                 id: syncLabel
                 height: parent.height
-                text: curWatchConnected ? "connected" : "disconnected"
+                text: curWatchConnected ? watch.name : "disconnected"
                 verticalAlignment: Text.AlignVCenter
             }
 
@@ -60,14 +60,17 @@ Page {
                 height: parent.height
                 width: parent.height
                 source: "../img/ios-battery-full.svg" //maybe change this so the icon changes with battery
+                Label {
+                    anchors.centerIn: parent
+                    id: batteryLabel
+                    height: parent.height
+                    text: curWatchConnected ? watch.batteryLevel + ("%") : null
+                    verticalAlignment: Text.AlignVCenter
+                    color: "white"
+                    font.pixelSize: 9
+                }
             }
 
-            Label {
-                id: batteryLabel
-                height: parent.height
-                text: curWatchConnected ? watch.batteryLevel + ("%") : "unknown"
-                verticalAlignment: Text.AlignVCenter
-            }
         }
 
         Button { //button opens the quick settings menu
@@ -75,11 +78,13 @@ Page {
             height: parent.height
             width: height
             anchors.right: parent.right
+            onClicked: settingsPopup.open()
+
             Image {
                 source: Qt.resolvedUrl("../img/md-settings.svg")
                 anchors.fill: parent
             }
-            onClicked: settingsPopup.open()
+
             Popup { //the quick settings menu itself
                 id: settingsPopup
                 y: parent.height
@@ -90,14 +95,17 @@ Page {
                         text: "Watch Selection"
                         onClicked: pageStack.push(Qt.resolvedUrl("WatchSelectionPage.qml"))
                     }
+
                     Button {
 
-                        text: "UI settings"
-                        onClicked: pageStack.push(Qt.resolvedUrl("UISettings.qml"))
+                        text: "App settings"
+                        onClicked: pageStack.push(Qt.resolvedUrl("AppSettings.qml"))
                     }
+
                     Button {
                         text: "Service status"
                     }
+
                     Button {
                         text: "About"
                         onClicked: pageStack.push(Qt.resolvedUrl("InfoPage.qml"))
@@ -126,7 +134,7 @@ Page {
             anchors.topMargin: 0
             implicitWidth: settings.menuPanelWidth
             width: parent.width/6
-            palette.window: "orange"
+            palette.window: settings.value("uiAccentColor","orange")
         }
 
         StackView {
