@@ -1,5 +1,4 @@
 cmake_minimum_required(VERSION 3.15)
-find_package(Qt5 COMPONENTS Qml Quick LinguistTools REQUIRED)
 set(xlatFiles 
     translations/qml_en.ts 
     translations/qml_de.ts
@@ -50,4 +49,4 @@ target_include_directories(buran
         $<INSTALL_INTERFACE:.>
         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}>
 )
-install(TARGETS buran CONFIGURATIONS Release)
+install(TARGETS buran)
