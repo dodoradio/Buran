@@ -86,7 +86,7 @@ Pane {
                     enabled: watch && watch.screenshotServiceReady
                     width: parent.width/layout.columns
                     onClicked: {
-                        watch.sendNotify(Qt.formatDateTime(new Date(), "zzz"), qsTr("Telescope"), "ios-watch-vibrating", qsTr("Watch-Finder"), localHostName + qsTr(" is looking for you!"))
+                        watch.sendNotify(Qt.formatDateTime(new Date(), "zzz"), qsTr("Telescope"), "ios-watch-vibrating", qsTr("Watch-Finder"), localHostName + qsTr(" is looking for you!"), "strong")
                     }
                     imageSource: Qt.resolvedUrl("../img/ios-watch-vibrating.svg")
                     text: qsTr("Find my watch!")
