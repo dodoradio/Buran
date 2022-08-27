@@ -2,7 +2,6 @@
 <qresource>
     <file>qml/main.qml</file>
     <file>qml/pages/AppSettings.qml</file>
-    <file>qml/components/IconButton.qml</file>
     <file>qml/pages/InfoPage.qml</file>
     <file>qml/pages/LoadingPage.qml</file>
     <file>qml/pages/LocationPicker.qml</file>
@@ -24,6 +23,11 @@
     <file>qml/img/md-watch.svg</file>
     <file>qml/img/md-settings.svg</file>
     <file>qml/img/time-sync.svg</file>
-    <!-- menus -->
+    <file>qml/img/harbour-starship.svg</file>
+    <!-- components -->
+    <file>qml/components/IconButton.qml</file>
+    <file>qml/components/BuranPopupMenu.qml</file>
+    <!-- background -->
+    <file>qml/img/background-default.jpg</file>
 </qresource>
 </RCC>

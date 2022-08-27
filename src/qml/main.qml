@@ -79,10 +79,10 @@ ApplicationWindow {
             serviceController.startService();
         }
 
-        if (watches.version !== version) {
-            console.log("Service file version (", version, ") is not equal running service version (", watches.version, "). Restarting service.");
-            serviceController.restartService();
-        }
+        //if (watches.version !== version) {
+            //console.log("Service file version (", version, ") is not equal running service version (", watches.version, "). Restarting service.");
+            //serviceController.restartService();
+        //}
     }
 
     function restartService() {
@@ -92,5 +92,9 @@ ApplicationWindow {
     function getCurWatch() {
         if(curWatch >= 0) return watches.get(curWatch);
         return null;
+    }
+
+    function reloadUI() {
+        uiLoader.setSource(settings.value("uiStyle", 1) < 1 ? "pages/RootUIDesktop.qml" : "pages/RootUIMobile.qml")
     }
 }

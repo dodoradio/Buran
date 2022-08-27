@@ -33,87 +33,87 @@ import "../components/"
 Pane {
     id: root
     property int columns: 1
+    font.pixelSize: 6
 
     Settings {
         id: settings
         property bool timeSync
     }
 
-        Flickable {
-            id: mainMenuPanel
-            contentHeight: layout.height
-            clip: true
-            anchors.rightMargin: 0
-            anchors.bottomMargin: 0
-            anchors.leftMargin: 0
-            anchors.topMargin: 0
-            anchors.fill: parent
+    Flickable {
+        id: mainMenuPanel
+        contentHeight: layout.height
+        clip: true
 
-            Grid {
-                id: layout
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.top: parent.top
-                columns: root.columns
-                //anchors.margins: Theme.paddingMedium
+        anchors.margins: 0
+        anchors.fill: parent
 
-                IconButton { //time sync toggle
-                    enabled: watch && watch.timeServiceReady
-                    width: parent.width/layout.columns
-                    property bool toggled: settings.timeSync
-                    onPressed: {
-                        toggled = !toggled
-                        settings.timeSync = toggled
-                        if(settings.timeSync == true) doTimeSync();
+        Grid {
+            id: layout
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.top: parent.top
+            columns: root.columns
 
-                    }
-                    text: qsTr("Enable time synchronisation")
-                    imageSource: Qt.resolvedUrl("../img/time-sync.svg")
-                    state: toggled
+            anchors.margins: 0
+
+            IconButton { //time sync toggle
+                enabled: watch && watch.timeServiceReady
+                width: parent.width/layout.columns
+                property bool toggled: settings.timeSync
+                onPressed: {
+                    toggled = !toggled
+                    settings.timeSync = toggled
+                    if(settings.timeSync == true) doTimeSync();
+
                 }
+                text: qsTr("Enable time synchronisation")
+                imageSource: Qt.resolvedUrl("../img/time-sync.svg")
+                state: toggled
+            }
 
-                IconButton { //notification settings button
-                    enabled: watch && watch.timeServiceReady
-                    width: parent.width/layout.columns
-                    onClicked: {
-                        pageStack.replace(Qt.resolvedUrl("NotificationSettingsPage.qml"))
-                    }
-                    imageSource: Qt.resolvedUrl("../img/ios-notifications-outline.svg")
-                    text: qsTr("Notification settings")
+            IconButton { //notification settings button
+                enabled: watch && watch.timeServiceReady
+                width: parent.width/layout.columns
+                onClicked: {
+                    pageStack.replace(Qt.resolvedUrl("NotificationSettingsPage.qml"))
                 }
+                imageSource: Qt.resolvedUrl("../img/ios-notifications-outline.svg")
+                text: qsTr("Notification settings")
+            }
 
-                IconButton { //watch finder button
-                    enabled: watch && watch.screenshotServiceReady
-                    width: parent.width/layout.columns
-                    onClicked: {
-                        watch.sendNotify(Qt.formatDateTime(new Date(), "zzz"), qsTr("Telescope"), "ios-watch-vibrating", qsTr("Watch-Finder"), localHostName + qsTr(" is looking for you!"), "strong")
-                    }
-                    imageSource: Qt.resolvedUrl("../img/ios-watch-vibrating.svg")
-                    text: qsTr("Find my watch!")
+            IconButton { //watch finder button
+                enabled: watch && watch.screenshotServiceReady
+                width: parent.width/layout.columns
+                onClicked: {
+                    watch.sendNotify(Qt.formatDateTime(new Date(), "zzz"), qsTr("Telescope"), "ios-watch-vibrating", qsTr("Watch-Finder"), localHostName + qsTr(" is looking for you!"))
                 }
+                imageSource: Qt.resolvedUrl("../img/ios-watch-vibrating.svg")
+                text: qsTr("Find my watch!")
+            }
 
-                IconButton { //screenshot button
-                    enabled: watch && watch.timeServiceReady
-                    width: parent.width/layout.columns
-                    onClicked: {
-                            //watch.requestScreenshot()
-                            pageStack.replace("ScreenshotPage.qml")
-                    }
-                    imageSource: Qt.resolvedUrl("../img/md-images.svg")
-                    text: qsTr("Take a screenshot")
+            IconButton { //screenshot button
+                enabled: watch && watch.timeServiceReady
+                width: parent.width/layout.columns
+                onClicked: {
+                        //watch.requestScreenshot()
+                        pageStack.replace("ScreenshotPage.qml")
                 }
+                imageSource: Qt.resolvedUrl("../img/md-images.svg")
+                text: qsTr("Take a screenshot")
+            }
 
-                IconButton { //weather settings button
-                    enabled: watch && watch.timeServiceReady
-                    width: parent.width/layout.columns
-                    onClicked: {
-                        pageStack.replace(Qt.resolvedUrl("WeatherSettingsPage.qml"))
-                    }
-                    imageSource: Qt.resolvedUrl("../img/ios-partly-sunny-outline.svg")
-                    text: qsTr("Weather settings")
+            IconButton { //weather settings button
+                enabled: watch && watch.timeServiceReady
+                width: parent.width/layout.columns
+                onClicked: {
+                    pageStack.replace(Qt.resolvedUrl("WeatherSettingsPage.qml"))
                 }
+                imageSource: Qt.resolvedUrl("../img/ios-partly-sunny-outline.svg")
+                text: qsTr("Weather settings")
             }
         }
+    }
 
     /*Binding {
         target: timeSyncSwitch

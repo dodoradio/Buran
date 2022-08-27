@@ -22,54 +22,68 @@ import QtQuick 2.2
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.15
 
-Page {
-    ListView {
+Item {
+    Rectangle {
+        color: "#FFFFFF"
+        opacity: 0.8
+        radius: 8
         anchors.fill: parent
-        model: watches
-
-        /*header: Rectangle {
-            //title: qsTr("Starship")
-            //description: qsTr("Manage Watches")
-        }*/
-
-        delegate: Button {
-            enabled: watches.count !== 0
-            width: parent.width
-            down: index == curWatch
-
-            Row {
-                width: parent.width
-
-                Image {
-                    source: Qt.resolvedUrl("../img/md-watch.svg")
-                    height: coolumn.height
-                    width: height
-                }
-
-                Column {
-                    id: coolumn
-                    Label {
-                        text: name
-                    }
-
-                    Label {
-                        text: address
-                    }
-                }
-            }
-
-            onClicked: {
-                watches.selectWatch(index)
-                loadStack()
-            }
-        }
-
-        Rectangle {
-            visible: (watches.count === 0)
+        anchors.margins: 18
+        ListView {
+            model: watches
+            spacing: 8
             anchors.fill: parent
+
+            /*header: Rectangle {
+                //title: qsTr("Starship")
+                //description: qsTr("Manage Watches")
+            }*/
+
+            delegate: Button {
+                id: buttonDelegate
+                enabled: watches.count !== 0
+                width: parent.width
+                anchors.horizontalCenter: parent.horizontalCenter
+                down: index == curWatch
+                height: buttonRow.height
+
+                background: Rectangle {
+                    radius: 4
+                    color: palette.button
+                    opacity: 0.8
+                }
+
+                Row {
+                    id: buttonRow
+                    width: parent.width
+
+                    Image {
+                        source: Qt.resolvedUrl("../img/md-watch.svg")
+                        height: coolumn.height
+                        width: height
+                    }
+
+                    Column {
+                        id: coolumn
+                        Label {
+                            text: name
+                        }
+
+                        Label {
+                            text: address
+                        }
+                    }
+                }
+
+                onClicked: {
+                    watches.selectWatch(index)
+                    loadStack()
+                }
+            }
 
             Label {
                 id: noWatchLabel
+                visible: (watches.count === 0)
                 text: qsTr("No smartwatches configured yet. Please connect your smartwatch using System Settings.")
                 //font.pixelSize: Theme.fontSizeLarge
                 //width: parent.width-(Theme.paddingSmall*2)

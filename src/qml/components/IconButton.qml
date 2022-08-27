@@ -45,29 +45,26 @@ MouseArea {
         property string imageSource
         property bool state: pressed
 
-        //onClicked: model.object.launchApplication()
-
-        //Item {
-            //id: circleWrapper
-            //anchors.fill: parent
-            Rectangle {
-                id: circle
-                anchors.centerIn: parent
-                width: parent.width * 0.7
-                height: width
-                radius: width/2
-                color: buttonRoot.state ? "#cccccc" : "#f4f4f4"
-            }
-        //}
+        Rectangle {
+            id: circle
+            anchors.centerIn: parent
+            width: parent.width * 0.7
+            height: width
+            radius: width/2
+            color: buttonRoot.state ? "#cccccc" : "#f4f4f4"
+        }
         //DropShadow {
-            //anchors.fill: circleWrapper
+            //anchors.centerIn: parent
+            //width: parent.width * 0.7
+            //height: width
             //horizontalOffset: 0
             //verticalOffset: 0
             //radius: 8.0
             //samples: 12
             //color: "#80000000"
-            //source: circleWrapper
+            //source: circle
             //cached: true
+            //visible: !buttonRoot.state
         //}
 
         Image {
@@ -88,7 +85,7 @@ MouseArea {
             //anchors.topMargin: parent.height * 0.42
             anchors.horizontalCenter: parent.horizontalCenter
             color: "#000000"
-            font.pixelSize: 20//((appsListView.width > appsListView.height ? appsListView.height : appsListView.width) / Dims.l(100)) * Dims.l(5)
+            font.pixelSize: 15//((appsListView.width > appsListView.height ? appsListView.height : appsListView.width) / Dims.l(100)) * Dims.l(5)
             //font.styleName: "SemiCondensed Bold"
             //font.letterSpacing: parent.width * 0.002
             text: parent.text

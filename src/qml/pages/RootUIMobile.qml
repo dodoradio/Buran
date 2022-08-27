@@ -23,16 +23,18 @@
  * Currently a lot of code is shared between the two UIs and this may lead to parity issues.
  */
 
-import QtQuick 2.2
+import QtQuick 2.3
 import QtQuick.Layouts 1.1
 import QtGraphicalEffects 1.0
 import QtQuick.Controls 2.15
 import Qt.labs.settings 1.0
 
+import "../components/"
+
 Page {
 
     id: root
-    palette.window: settings.value("uiAccentColor","orange")
+    palette.window: settings.value("uiAccentColor","#f19a11")
 
     header: ToolBar {
         id: header
@@ -79,46 +81,8 @@ Page {
                 }
             }
         }
-
-        Button { //button opens the quick settings menu
-            id: settingsButton
-            height: parent.height
-            width: height
-            anchors.right: parent.right
-            onClicked: settingsPopup.open()
-
-            Image {
-                source: Qt.resolvedUrl("../img/md-settings.svg")
-                anchors.fill: parent
-            }
-
-            Popup { //the quick settings menu itself
-                id: settingsPopup
-                y: parent.height
-                x: parent.width - width
-                padding: 0
-                Column {
-                    Button {
-                        text: "Watch Selection"
-                        onClicked: pageStack.push(Qt.resolvedUrl("WatchSelectionPage.qml"))
-                    }
-
-                    Button {
-
-                        text: "App settings"
-                        onClicked: pageStack.push(Qt.resolvedUrl("AppSettings.qml"))
-                    }
-
-                    Button {
-                        text: "Service status"
-                    }
-
-                    Button {
-                        text: "About"
-                        onClicked: pageStack.push(Qt.resolvedUrl("InfoPage.qml"))
-                    }
-                }
-            }
+        BuranPopupMenu {
+            id: settingsPopup
         }
     }
 
@@ -127,6 +91,12 @@ Page {
         anchors.fill: parent
         clip: true
         Component.onCompleted: loadStack()
+        Image {
+            anchors.fill: parent
+            source: "../img/background-default.jpg"
+            fillMode: Image.PreserveAspectCrop
+            mipmap: true
+        }
     }
 
     function loadStack() {

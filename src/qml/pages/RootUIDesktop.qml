@@ -23,20 +23,25 @@
  * Currently a lot of code is shared between the two UIs and this may lead to parity issues.
  */
 
-import QtQuick 2.2
+import QtQuick 2.3
 import QtQuick.Layouts 1.1
 import QtGraphicalEffects 1.0
 import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.15
 import Qt.labs.settings 1.0
+
+import "../components/"
 
 Page {
 
     id: root
-
+    palette.base: "#f4f4f4"
+    palette.button: "#f4f4f4"
     header: ToolBar {
         id: header
         width: parent.width
-        height: 40 //TODO: change this from a static value
+        height: 40
+        font.pixelSize: 15
         Row{
             id: statusRowLayout
             height: parent.height
@@ -48,18 +53,12 @@ Page {
                 source: curWatchConnected ? Qt.resolvedUrl("../img/ios-bluetooth-connected.svg") : Qt.resolvedUrl("../img/ios-bluetooth.svg")
             }
 
-            Label { //text whether watch is connected
-                id: syncLabel
-                height: parent.height
-                text: curWatchConnected ? watch.name : "disconnected"
-                verticalAlignment: Text.AlignVCenter
-            }
-
             Image {
                 id: batteryIcon
                 height: parent.height
                 width: parent.height
                 source: "../img/ios-battery-full.svg" //maybe change this so the icon changes with battery
+                visible: watch && watch.timeServiceReady
                 Label {
                     anchors.centerIn: parent
                     id: batteryLabel
@@ -71,6 +70,16 @@ Page {
                 }
             }
 
+        }
+
+        Label { //text whether watch is connected
+            id: syncLabel
+            height: parent.height
+            text: curWatchConnected ? watch.name : "disconnected"
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
+            width: 120
+            anchors.centerIn: parent
         }
 
         Button { //button opens the quick settings menu
@@ -85,32 +94,35 @@ Page {
                 anchors.fill: parent
             }
 
-            Popup { //the quick settings menu itself
+            //Popup { //the quick settings menu itself
+                //id: settingsPopup
+                //y: parent.height
+                //x: parent.width - width
+                //padding: 0
+                //Column {
+                    //Button {
+                        //text: "Watch Selection"
+                        //onClicked: pageStack.push(Qt.resolvedUrl("WatchSelectionPage.qml"))
+                    //}
+
+                    //Button {
+
+                        //text: "App settings"
+                        //onClicked: pageStack.push(Qt.resolvedUrl("AppSettings.qml"))
+                    //}
+
+                    //Button {
+                        //text: "Service status"
+                    //}
+
+                    //Button {
+                        //text: "About"
+                        //onClicked: pageStack.push(Qt.resolvedUrl("InfoPage.qml"))
+                    //}
+                //}
+            //}
+            BuranPopupMenu {
                 id: settingsPopup
-                y: parent.height
-                x: parent.width - width
-                padding: 0
-                Column {
-                    Button {
-                        text: "Watch Selection"
-                        onClicked: pageStack.push(Qt.resolvedUrl("WatchSelectionPage.qml"))
-                    }
-
-                    Button {
-
-                        text: "App settings"
-                        onClicked: pageStack.push(Qt.resolvedUrl("AppSettings.qml"))
-                    }
-
-                    Button {
-                        text: "Service status"
-                    }
-
-                    Button {
-                        text: "About"
-                        onClicked: pageStack.push(Qt.resolvedUrl("InfoPage.qml"))
-                    }
-                }
             }
         }
     }
@@ -120,26 +132,28 @@ Page {
         property alias menuPanelWidth: mainMenuPanel.width
     }
 
-    SplitView {
-        anchors.fill: parent
+    contentItem: SplitView {
+        //anchors.fill: parent
         height: parent.height
 
         MainMenuPage{
             id: mainMenuPanel
-            contentHeight: layout.height
             clip: true
-            anchors.rightMargin: 0
-            anchors.bottomMargin: 0
-            anchors.leftMargin: 0
-            anchors.topMargin: 0
             implicitWidth: settings.menuPanelWidth
             width: parent.width/6
-            palette.window: settings.value("uiAccentColor","orange")
+            palette.window: settings.value("uiAccentColor","#f19a11")
+            //Layout.minimumWidth: 40
         }
-
         StackView {
             id: pageStack
+            Layout.fillWidth: true
             clip: true
+            Image {
+                anchors.fill: parent
+                source: "../img/background-default.jpg"
+                fillMode: Image.PreserveAspectCrop
+                mipmap: true
+            }
         }
     }
 
