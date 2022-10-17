@@ -4,9 +4,9 @@ set(xlatFiles
     translations/qml_de.ts
 )
 
-qt5_create_translation(qmFiles ${CMAKE_CURRENT_SOURCE_DIR} ${xlatFiles})
+qt_create_translation(qmFiles ${CMAKE_CURRENT_SOURCE_DIR} ${xlatFiles})
 
-function (qt5_create_translation_qrc target) 
+function (qt_create_translation_qrc target) 
     set(options)
     set(oneValueArgs PREFIX)
     set(multiValueArgs OPTIONS)
@@ -30,7 +30,7 @@ function (qt5_create_translation_qrc target)
     add_custom_target(${target} ALL DEPENDS ${xlat_files})
 endfunction()
 
-qt5_create_translation_qrc(xlat.qrc "${qmFiles}" PREFIX "qml/i18n")
+qt_create_translation_qrc(xlat.qrc "${qmFiles}" PREFIX "qml/i18n")
 
 add_executable(buran cpp/main.cpp 
     $<$<NOT:$<CONFIG:Debug>>:buran.qrc>
@@ -43,7 +43,7 @@ target_compile_options(buran PRIVATE -Wall -Wextra -pedantic -Werror)
 target_compile_definitions(buran PRIVATE 
     $<$<CONFIG:Debug>:DEBUG_BUILD>
 )
-target_link_libraries(buran PRIVATE Qt5::Quick Qt5::Qml)
+target_link_libraries(buran PRIVATE Qt::Quick Qt::Qml)
 target_include_directories(buran
     PUBLIC
         $<INSTALL_INTERFACE:.>
