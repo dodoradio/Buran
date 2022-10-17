@@ -218,7 +218,7 @@ Pane {
             }
         };
         var omit = "current,minutely,hourly,alerts";
-        var url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=${omit}&appid=${apikey}`;
+        var url = "https://api.openweathermap.org/data/2.5/onecall?lat="+lat+"&lon="+lon+"&exclude="+omit+"&appid="+apikey;
         console.log("url: ", url);
         xhttp.open("GET", url);
         xhttp.send();
