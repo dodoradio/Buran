@@ -25,7 +25,7 @@
 
 import QtQuick 2.3
 import QtQuick.Layouts 1.1
-import QtGraphicalEffects 1.0
+import Qt5Compat.GraphicalEffects
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import Qt.labs.settings 1.0
@@ -53,6 +53,13 @@ Page {
                 source: curWatchConnected ? Qt.resolvedUrl("../img/ios-bluetooth-connected.svg") : Qt.resolvedUrl("../img/ios-bluetooth.svg")
             }
 
+            Label { //text whether watch is connected
+                id: syncLabel
+                height: parent.height
+                text: curWatchConnected && watch ? watch.name : "disconnected"
+                verticalAlignment: Text.AlignVCenter
+            }
+
             Image {
                 id: batteryIcon
                 height: parent.height
@@ -63,23 +70,13 @@ Page {
                     anchors.centerIn: parent
                     id: batteryLabel
                     height: parent.height
-                    text: curWatchConnected ? watch.batteryLevel + ("%") : null
+                    text: curWatchConnected && watch ? watch.batteryLevel + ("%") : null
                     verticalAlignment: Text.AlignVCenter
                     color: "white"
                     font.pixelSize: 9
                 }
             }
 
-        }
-
-        Label { //text whether watch is connected
-            id: syncLabel
-            height: parent.height
-            text: curWatchConnected ? watch.name : "disconnected"
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
-            width: 120
-            anchors.centerIn: parent
         }
 
         Button { //button opens the quick settings menu
