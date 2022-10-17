@@ -25,7 +25,7 @@
 
 import QtQuick 2.2
 import QtQuick.Layouts 1.1
-import QtGraphicalEffects 1.0
+import Qt5Compat.GraphicalEffects
 import QtQuick.Controls 2.15
 import Qt.labs.settings 1.0
 import "../components/"
@@ -44,7 +44,6 @@ Pane {
         id: mainMenuPanel
         contentHeight: layout.height
         clip: true
-
         anchors.margins: 0
         anchors.fill: parent
 
@@ -59,7 +58,7 @@ Pane {
 
             IconButton { //time sync toggle
                 enabled: watch && watch.timeServiceReady
-                width: parent.width/layout.columns
+                width: parent.width/layout.columns * (enabled ? 1 : 0.5)
                 property bool toggled: settings.timeSync
                 onPressed: {
                     toggled = !toggled
@@ -72,31 +71,22 @@ Pane {
                 state: toggled
             }
 
-            IconButton { //notification settings button
-                enabled: watch && watch.timeServiceReady
-                width: parent.width/layout.columns
-                onClicked: {
-                    pageStack.replace(Qt.resolvedUrl("NotificationSettingsPage.qml"))
-                }
-                imageSource: Qt.resolvedUrl("../img/ios-notifications-outline.svg")
-                text: qsTr("Notification settings")
-            }
-
             IconButton { //watch finder button
-                enabled: watch && watch.screenshotServiceReady
-                width: parent.width/layout.columns
+                enabled: watch && watch.notificationServiceReady
+                width: parent.width/layout.columns * (enabled ? 1 : 0.5)
                 onClicked: {
-                    watch.sendNotify(Qt.formatDateTime(new Date(), "zzz"), qsTr("Telescope"), "ios-watch-vibrating", qsTr("Watch-Finder"), localHostName + qsTr(" is looking for you!"))
+                    watch.sendNotify(Qt.formatDateTime(new Date(), "zzz"), qsTr("Telescope"), "ios-watch-vibrating", qsTr("Watch-Finder"), localHostName + qsTr(" is looking for you!"), "strong")
                 }
                 imageSource: Qt.resolvedUrl("../img/ios-watch-vibrating.svg")
                 text: qsTr("Find my watch!")
             }
 
             IconButton { //screenshot button
-                enabled: watch && watch.timeServiceReady
-                width: parent.width/layout.columns
+                enabled: watch && watch.screenshotServiceReady
+                width: parent.width/layout.columns * (enabled ? 1 : 0.5)
                 onClicked: {
-                        //watch.requestScreenshot()
+                        watch.setScreenshotFileInfo(homePath + "/.asteroidos/screenshot/'screenshot'yyyyMMdd_hhmmss'.jpg'")
+                        watch.requestScreenshot()
                         pageStack.replace("ScreenshotPage.qml")
                 }
                 imageSource: Qt.resolvedUrl("../img/md-images.svg")
@@ -104,8 +94,8 @@ Pane {
             }
 
             IconButton { //weather settings button
-                enabled: watch && watch.timeServiceReady
-                width: parent.width/layout.columns
+                enabled: watch && watch.weatherServiceReady
+                width: parent.width/layout.columns * (enabled ? 1 : 0.5)
                 onClicked: {
                     pageStack.replace(Qt.resolvedUrl("WeatherSettingsPage.qml"))
                 }
@@ -114,12 +104,6 @@ Pane {
             }
         }
     }
-
-    /*Binding {
-        target: timeSyncSwitch
-        property: "checked"
-        value: settings.timeSync
-    }*/
 
     Connections {
         target: watch
@@ -130,10 +114,6 @@ Pane {
         if(watch.timeServiceReady && settings.timeSync) watch.setTime(Date())
     }
 
-    //Connections {
-        //target: watch
-        //onNotificationServiceReadyChanged: setVib();
-    //}
     function onNotificationServiceReadyChanged() {
         setVib();
     }
@@ -142,6 +122,5 @@ Pane {
         if(watch.notificationServiceReady) watch.setVibration(settings.notifyVib)
     }
 
-    //Component.onCompleted: watch.setScreenshotFileInfo("/home/phablet/.local/share/telescope.asteroidos/screenshot/'screenshot'ddMMyyyy_hhmmss'.jpg'");
 }
 
