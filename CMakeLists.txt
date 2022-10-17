@@ -8,7 +8,7 @@ FetchContent_Declare(
 )
 set(DESKTOP_PLATFORM ON)
 FetchContent_MakeAvailable(asteroidsyncservice)
-find_package(Qt5 COMPONENTS Qml Quick LinguistTools REQUIRED)
+find_package(Qt6 COMPONENTS Qml Quick LinguistTools REQUIRED)
 configure_file(
     "buran_config.h.in"
     "buran_config.h"
