@@ -150,7 +150,7 @@ Page {
             clip: true
             Image {
                 anchors.fill: parent
-                source: "../img/background-default.jpg"
+                source: Qt.resolvedUrl("../img/background-default.jpg")
                 fillMode: Image.PreserveAspectCrop
                 mipmap: true
             }
