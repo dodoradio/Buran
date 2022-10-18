@@ -18,6 +18,7 @@
  */
 
 #include "buran_config.h"
+#include <QDir>
 #include <QHostInfo>
 #include <QQmlContext>
 #include <QGuiApplication>
@@ -32,6 +33,7 @@ int main(int argc, char *argv[])
     app.setApplicationVersion(VERSION);
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("localHostName", QHostInfo::localHostName());
+    engine.rootContext()->setContextProperty("homePath", QDir::homePath());
 #ifdef DEBUG_BUILD
     engine.load(QUrl("../src/qml/main.qml"));
 #else
