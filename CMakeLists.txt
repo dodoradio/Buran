@@ -4,7 +4,7 @@ include(FetchContent)
 FetchContent_Declare(
   asteroidsyncservice
   GIT_REPOSITORY  https://github.com/AsteroidOS/asteroidsyncservice
-  GIT_TAG         a7993d1b9bf1bafe91c7af949e13b9e7a5951bcd
+  GIT_TAG         ba7eecfc6d6d923227aedb32372a340bcab5315d
 )
 set(DESKTOP_PLATFORM ON)
 FetchContent_MakeAvailable(asteroidsyncservice)
