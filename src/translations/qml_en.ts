@@ -38,42 +38,37 @@
 <context>
     <name>MainMenuPage</name>
     <message>
-        <location filename="../qml/pages/MainMenuPage.qml" line="70"/>
+        <location filename="../qml/pages/MainMenuPage.qml" line="69"/>
         <source>Enable time synchronisation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainMenuPage.qml" line="82"/>
-        <source>Notification settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/MainMenuPage.qml" line="89"/>
+        <location filename="../qml/pages/MainMenuPage.qml" line="78"/>
         <source>Telescope</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainMenuPage.qml" line="89"/>
+        <location filename="../qml/pages/MainMenuPage.qml" line="78"/>
         <source>Watch-Finder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainMenuPage.qml" line="89"/>
+        <location filename="../qml/pages/MainMenuPage.qml" line="78"/>
         <source> is looking for you!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainMenuPage.qml" line="92"/>
+        <location filename="../qml/pages/MainMenuPage.qml" line="81"/>
         <source>Find my watch!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainMenuPage.qml" line="103"/>
+        <location filename="../qml/pages/MainMenuPage.qml" line="93"/>
         <source>Take a screenshot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainMenuPage.qml" line="113"/>
+        <location filename="../qml/pages/MainMenuPage.qml" line="103"/>
         <source>Weather settings</source>
         <translation type="unfinished"></translation>
     </message>
