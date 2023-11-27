@@ -40,18 +40,19 @@ Page {
         id: header
         width: parent.width
         height: 40 //TODO: change this from a static value
+        Button { //back button
+            icon.name: "draw-arrow-back"
+            width: height
+            height: parent.height
+            flat: true
+            onClicked: {
+                loadStack()
+            }
+        }
         Row{
             id: statusRowLayout
+            anchors.horizontalCenter: parent.horizontalCenter
             height: parent.height
-            Button { //back button
-                icon.name: "draw-arrow-back"
-                width: height
-                height: parent.height
-                flat: true
-                onClicked: {
-                    loadStack()
-                }
-            }
 
             Image { //shows an icon for whether watch is connected or not
                 id: syncIcon
@@ -63,7 +64,8 @@ Page {
             Label { //text whether watch is connected
                 id: syncLabel
                 height: parent.height
-                text: curWatchConnected ? "connected" : "disconnected"
+                padding: height/4
+                text: curWatchConnected && watch ? watch.name : "disconnected"
                 verticalAlignment: Text.AlignVCenter
             }
 

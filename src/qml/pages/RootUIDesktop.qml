@@ -45,6 +45,7 @@ Page {
         Row{
             id: statusRowLayout
             height: parent.height
+            anchors.horizontalCenter: parent.horizontalCenter
 
             Image { //shows an icon for whether watch is connected or not
                 id: syncIcon
@@ -56,6 +57,7 @@ Page {
             Label { //text whether watch is connected
                 id: syncLabel
                 height: parent.height
+                padding: height/4
                 text: curWatchConnected && watch ? watch.name : "disconnected"
                 verticalAlignment: Text.AlignVCenter
             }
