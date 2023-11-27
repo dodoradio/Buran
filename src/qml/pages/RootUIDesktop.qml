@@ -85,50 +85,6 @@ Page {
             }
 
         }
-
-        Button { //button opens the quick settings menu
-            id: settingsButton
-            height: parent.height
-            width: height
-            anchors.right: parent.right
-            onClicked: settingsPopup.open()
-
-            Image {
-                source: Qt.resolvedUrl("../img/md-settings.svg")
-                anchors.fill: parent
-            }
-
-            //Popup { //the quick settings menu itself
-                //id: settingsPopup
-                //y: parent.height
-                //x: parent.width - width
-                //padding: 0
-                //Column {
-                    //Button {
-                        //text: "Watch Selection"
-                        //onClicked: pageStack.push(Qt.resolvedUrl("WatchSelectionPage.qml"))
-                    //}
-
-                    //Button {
-
-                        //text: "App settings"
-                        //onClicked: pageStack.push(Qt.resolvedUrl("AppSettings.qml"))
-                    //}
-
-                    //Button {
-                        //text: "Service status"
-                    //}
-
-                    //Button {
-                        //text: "About"
-                        //onClicked: pageStack.push(Qt.resolvedUrl("InfoPage.qml"))
-                    //}
-                //}
-            //}
-            BuranPopupMenu {
-                id: settingsPopup
-            }
-        }
     }
 
     Settings {

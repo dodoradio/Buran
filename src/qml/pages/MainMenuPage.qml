@@ -100,6 +100,15 @@ Pane {
                 text: qsTr("Enable time synchronisation")
                 imageSource: Qt.resolvedUrl("../img/time-sync.svg")
             }
+
+            IconButton {
+                width: parent.width/layout.columns
+                onClicked: {
+                    pageStack.replace(Qt.resolvedUrl("AppSettings.qml"))
+                }
+                imageSource: Qt.resolvedUrl("../img/md-settings.svg")
+                text: qsTr("App Settings")
+            }
         }
     }
 

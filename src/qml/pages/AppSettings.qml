@@ -53,6 +53,10 @@ Item {
                     text: "reload UI"
                     onClicked: reloadUI()
                 }
+                Button {
+                    text: "About"
+                    onClicked: pageStack.push(Qt.resolvedUrl("../pages/InfoPage.qml"))
+                }
             }
         }
     }

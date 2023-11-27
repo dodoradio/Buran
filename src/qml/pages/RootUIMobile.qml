@@ -90,9 +90,6 @@ Page {
                 }
             }
         }
-        BuranPopupMenu {
-            id: settingsPopup
-        }
     }
 
     StackView {
