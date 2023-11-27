@@ -103,7 +103,7 @@ Page {
         pageStack.clear();
         console.log(watches.connectedToService,curWatch,watches)
         if (watches.connectedToService) {
-            pageStack.push(Qt.resolvedUrl("MainMenuPage.qml"), {columns: 2})
+            // pageStack.push(Qt.resolvedUrl("MainMenuPage.qml"), {columns: 2})
             if (!(curWatch  >= 0)) {
                 pageStack.push(Qt.resolvedUrl("WatchSelectionPage.qml"))
             } else {
