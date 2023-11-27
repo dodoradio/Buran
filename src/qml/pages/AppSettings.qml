@@ -30,7 +30,7 @@ Item {
                 Button {
                     onPressed: {
                         colorDialog.trigger = "uiAccentColor"
-                        colorDialog.color = settings.value("uiAccentColor")
+                        colorDialog.selectedColor = settings.value("uiAccentColor")
                         colorDialog.visible = true
                     }
                     text: qsTr("pick UI accent colour")
@@ -40,7 +40,7 @@ Item {
                     title: "Please choose a color"
                     property var trigger
                     onAccepted: {
-                        settings.setValue(trigger,color);
+                        settings.setValue(trigger,selectedColor);
                         visible = false
                     }
                     onRejected: {
