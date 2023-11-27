@@ -34,6 +34,7 @@ Pane {
     id: root
     property int columns: 1
     font.pixelSize: 6
+    padding: 0
 
     Settings {
         id: settings
