@@ -26,7 +26,6 @@
     <file>qml/img/harbour-starship.svg</file>
     <!-- components -->
     <file>qml/components/IconButton.qml</file>
-    <file>qml/components/BuranPopupMenu.qml</file>
     <!-- background -->
     <file>qml/img/background-default.jpg</file>
 </qresource>
