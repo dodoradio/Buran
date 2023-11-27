@@ -109,7 +109,7 @@ Pane {
     }
 
     function doTimeSync() {
-        if(watch.timeServiceReady && settings.timeSync) watch.setTime(Date())
+        if(watch.timeServiceReady && settings.timeSync) watch.setTime(new Date())
     }
 
     function onNotificationServiceReadyChanged() {
