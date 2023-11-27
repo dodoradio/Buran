@@ -56,19 +56,6 @@ Pane {
 
             anchors.margins: 0
 
-            IconButton { //time sync toggle
-                enabled: watch && watch.timeServiceReady
-                width: parent.width/layout.columns * (enabled ? 1 : 0.5)
-                toggled: settings.timeSync
-                isToggleSwitch: true
-                onPressed: {
-                    settings.timeSync = toggled
-                    if(settings.timeSync == true) doTimeSync();
-                }
-                text: qsTr("Enable time synchronisation")
-                imageSource: Qt.resolvedUrl("../img/time-sync.svg")
-            }
-
             IconButton { //watch finder button
                 enabled: watch && watch.notificationServiceReady
                 width: parent.width/layout.columns * (enabled ? 1 : 0.5)
@@ -99,6 +86,19 @@ Pane {
                 }
                 imageSource: Qt.resolvedUrl("../img/ios-partly-sunny-outline.svg")
                 text: qsTr("Weather settings")
+            }
+
+            IconButton { //time sync toggle
+                enabled: watch && watch.timeServiceReady
+                width: parent.width/layout.columns * (enabled ? 1 : 0.5)
+                toggled: settings.timeSync
+                isToggleSwitch: true
+                onPressed: {
+                    settings.timeSync = toggled
+                    if(settings.timeSync == true) doTimeSync();
+                }
+                text: qsTr("Enable time synchronisation")
+                imageSource: Qt.resolvedUrl("../img/time-sync.svg")
             }
         }
     }
