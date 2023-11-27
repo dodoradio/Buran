@@ -61,12 +61,17 @@ Page {
                 source: curWatchConnected ? Qt.resolvedUrl("../img/ios-bluetooth-connected.svg") : Qt.resolvedUrl("../img/ios-bluetooth.svg")
             }
 
-            Label { //text whether watch is connected
+            Button { //text whether watch is connected
                 id: syncLabel
                 height: parent.height
                 padding: height/4
-                text: curWatchConnected && watch ? watch.name : "disconnected"
-                verticalAlignment: Text.AlignVCenter
+                flat: true
+                Label {
+                    anchors.centerIn: parent
+                    text: curWatchConnected && watch ? watch.name : "disconnected"
+                    verticalAlignment: Text.AlignVCenter
+                }
+                onClicked: pageStack.push(Qt.resolvedUrl("WatchSelectionPage.qml"))
             }
 
             Image {
