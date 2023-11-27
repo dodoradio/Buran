@@ -58,7 +58,8 @@ Pane {
 
             IconButton { //watch finder button
                 enabled: watch && watch.notificationServiceReady
-                width: parent.width/layout.columns * (enabled ? 1 : 0.5)
+                opacity: enabled ? 1 : 0.3
+                width: parent.width/layout.columns
                 onClicked: {
                     watch.sendNotify(Qt.formatDateTime(new Date(), "zzz"), qsTr("Telescope"), "ios-watch-vibrating", qsTr("Watch-Finder"), localHostName + qsTr(" is looking for you!"), "strong")
                 }
@@ -68,7 +69,8 @@ Pane {
 
             IconButton { //screenshot button
                 enabled: watch && watch.screenshotServiceReady
-                width: parent.width/layout.columns * (enabled ? 1 : 0.5)
+                opacity: enabled ? 1 : 0.3
+                width: parent.width/layout.columns
                 onClicked: {
                         watch.setScreenshotFileInfo(homePath + "/.asteroidos/screenshot/'screenshot'yyyyMMdd_hhmmss'.jpg'")
                         watch.requestScreenshot()
@@ -80,7 +82,8 @@ Pane {
 
             IconButton { //weather settings button
                 enabled: watch && watch.weatherServiceReady
-                width: parent.width/layout.columns * (enabled ? 1 : 0.5)
+                opacity: enabled ? 1 : 0.3
+                width: parent.width/layout.columns
                 onClicked: {
                     pageStack.replace(Qt.resolvedUrl("WeatherSettingsPage.qml"))
                 }
@@ -90,7 +93,8 @@ Pane {
 
             IconButton { //time sync toggle
                 enabled: watch && watch.timeServiceReady
-                width: parent.width/layout.columns * (enabled ? 1 : 0.5)
+                opacity: enabled ? 1 : 0.3
+                width: parent.width/layout.columns
                 toggled: settings.timeSync
                 isToggleSwitch: true
                 onPressed: {
