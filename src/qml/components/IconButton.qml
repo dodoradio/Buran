@@ -82,10 +82,11 @@ MouseArea {
             anchors.top: circle.bottom
             width: parent.width
             horizontalAlignment: Text.AlignHCenter
-            //anchors.topMargin: parent.height * 0.42
+            anchors.topMargin: parent.height * 0.03
             anchors.horizontalCenter: parent.horizontalCenter
             color: "#000000"
-            font.pixelSize: 15//((appsListView.width > appsListView.height ? appsListView.height : appsListView.width) / Dims.l(100)) * Dims.l(5)
+            font.pixelSize: parent.width*0.07
+            wrapMode: Text.WordWrap
             //font.styleName: "SemiCondensed Bold"
             //font.letterSpacing: parent.width * 0.002
             text: parent.text
