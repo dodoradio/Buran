@@ -44,6 +44,9 @@ MouseArea {
         property string text
         property string imageSource
         property bool state: pressed
+        property bool isToggleSwitch: false
+        property bool toggled: false
+        onPressed: if(isToggleSwitch) toggled = !toggled
 
         Rectangle {
             id: circle
@@ -52,6 +55,17 @@ MouseArea {
             height: width
             radius: width/2
             color: buttonRoot.state ? "#cccccc" : "#f4f4f4"
+            Rectangle {
+                id: toggleIndicator
+                visible: buttonRoot.isToggleSwitch
+                anchors.centerIn: parent
+                anchors.verticalCenterOffset: parent.width*Math.PI/10
+                anchors.horizontalCenterOffset: parent.width*Math.PI/10
+                width: parent.width * 0.2
+                height: width
+                radius: width/2
+                color: buttonRoot.toggled ? "#0f0" : "#f00"
+            }
         }
         //DropShadow {
             //anchors.centerIn: parent

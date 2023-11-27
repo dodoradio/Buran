@@ -59,16 +59,14 @@ Pane {
             IconButton { //time sync toggle
                 enabled: watch && watch.timeServiceReady
                 width: parent.width/layout.columns * (enabled ? 1 : 0.5)
-                property bool toggled: settings.timeSync
+                toggled: settings.timeSync
+                isToggleSwitch: true
                 onPressed: {
-                    toggled = !toggled
                     settings.timeSync = toggled
                     if(settings.timeSync == true) doTimeSync();
-
                 }
                 text: qsTr("Enable time synchronisation")
                 imageSource: Qt.resolvedUrl("../img/time-sync.svg")
-                state: toggled
             }
 
             IconButton { //watch finder button
