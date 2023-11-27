@@ -24,11 +24,11 @@
  */
 
 import QtQuick 2.3
+import QtCore
 import QtQuick.Layouts 1.1
 import Qt5Compat.GraphicalEffects
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
-import Qt.labs.settings 1.0
 
 import "../components/"
 

@@ -18,9 +18,9 @@
  */
 
 import QtQuick 2.2
+import QtCore
 import org.asteroid.syncservice 1.0
 import QtQuick.Controls 2.15
-import Qt.labs.settings 1.0
 import QtQuick.Window 2.2
 import "pages"
 

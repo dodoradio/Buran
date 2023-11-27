@@ -1,6 +1,6 @@
 import QtQuick 2.4
+import QtCore
 import QtQuick.Controls 2.15
-import Qt.labs.settings 1.0
 import QtQuick.Dialogs
 Item {
     Rectangle {

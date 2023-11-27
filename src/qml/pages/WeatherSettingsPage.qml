@@ -18,9 +18,9 @@
  */
 
 import QtQuick 2.15
+import QtCore
 import QtQuick.Controls 2.15
 import QtQml.Models 2.15
-import Qt.labs.settings 1.0
 
 
 Pane {
