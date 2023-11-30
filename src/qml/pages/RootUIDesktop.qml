@@ -57,9 +57,10 @@ Page {
             Button { //text whether watch is connected
                 id: syncLabel
                 height: parent.height
-                padding: height/4
                 flat: true
+                width: label.implicitWidth + height/2
                 Label {
+                    id: label
                     anchors.centerIn: parent
                     text: curWatchConnected && watch ? watch.name : "disconnected"
                     verticalAlignment: Text.AlignVCenter
