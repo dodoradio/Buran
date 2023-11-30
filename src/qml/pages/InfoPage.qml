@@ -23,83 +23,77 @@ import QtQuick.Controls 2.15
 
 Image {
     id: root
-    //anchors.fill: parent
-    //height: 200
     fillMode: Image.PreserveAspectCrop
-    //source: "../img/harbour-starship.svg" //TODO: replace this with a proper image
     Flickable {
         id: scrollPanel
         anchors.fill: parent
-        contentHeight: column.height + parent.height/2
-        //anchors.margins: Theme.paddingLarge
-
-        //Column {
-            //anchors.fill: parent
-
-            Rectangle {
-                id: contentPanel
+        contentHeight: contentPanel.height + parent.height/2 + 18
+        Rectangle {
+            id: contentPanel
+            color: "#FFFFFF"
+            opacity: 0.8
+            radius: 8
+            anchors.margins: 18
+            anchors.left: parent.left
+            anchors.right: parent.right
+            height: column.implicitHeight + 18
+            //height: column.implicitHeight - root.height/2
+            y: root.height/2
+            Column {
+                id: column
+                anchors.top: parent.top
                 width: parent.width
-                //height: childrenRect.height
-                //height: column.implicitHeight - root.height/2
-                y: root.height/2
-                height: parent.height
-                Image {
-                    id: logo
-                    source: "../img/harbour-starship.svg"
-                    //height: Theme.iconSizeLarge
-                    width: height
-                    anchors.verticalCenter: parent.top
-                    anchors.horizontalCenter: parent.horizontalCenter
-                }
-                Column {
-                    id: column
-                    anchors.top: logo.bottom
+                Item {
+                    height: logo.height/2 + 18
                     width: parent.width
-                    Label {
-                        width: parent.width
-                        text: qsTr("Version %1").arg(Qt.application.version)
-                        font.bold: true
-                        //color: Theme.highlightColor
-                        //font.pixelSize: Theme.fontSizeLarge
-                        horizontalAlignment: Text.AlignHCenter
-                    }
-
-                    Label {
-                        //anchors.top: column.bottom
-                        //anchors.horizontalCenter: parent.horizontalCenter
-                        width: parent.width*0.8
-                        leftPadding: parent.width/10
-                        //font.pixelSize: Theme.fontSizeSmall
-                        //color: Theme.highlightColor
-                        text: "This program is free software: you can redistribute it and/or modify "
-                            + "it under the terms of the GNU General Public License as published "
-                            + "by the Free Software Foundation, version 3 of the License.<br>"
-                            + "This program is distributed in the hope that it will be useful, "
-                            + "but WITHOUT ANY WARRANTY; without even the implied warranty of "
-                            + "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the "
-                            + "GNU General Public License for more details.<br>"
-                            + "You should have received a copy of the GNU General Public License "
-                            + "along with this program.  If not, see <a href=\"http://www.gnu.org/"
-                            + "licenses/\">http://www.gnu.org/licenses</a>."
-                        wrapMode: Text.WordWrap
-                    }
-                    Item {
-                        width: parent.width
-                        height: 18
-                    }
-
-                    Label {
-                        //anchors.top: column.bottom
-                        //anchors.horizontalCenter: parent.horizontalCenter
-                        width: parent.width*0.8
-                        leftPadding: parent.width/10
-                        //font.pixelSize: Theme.fontSizeSmall
-                        //color: Theme.highlightColor
-                        text: "Thanks to NASA for the wonderful default background."
-                        wrapMode: Text.WordWrap
-                    }
                 }
-            //}
+                Label {
+                    width: parent.width
+                    text: qsTr("Version %1").arg(Qt.application.version)
+                    font.bold: true
+                    horizontalAlignment: Text.AlignHCenter
+                }
+                Item {
+                    width: parent.width
+                    height: 18
+                }
+                Label {
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    leftPadding: parent.width/10
+                    rightPadding: parent.width/10
+                    text: "This program is free software: you can redistribute it and/or modify "
+                        + "it under the terms of the GNU General Public License as published "
+                        + "by the Free Software Foundation, version 3 of the License.<br>"
+                        + "This program is distributed in the hope that it will be useful, "
+                        + "but WITHOUT ANY WARRANTY; without even the implied warranty of "
+                        + "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the "
+                        + "GNU General Public License for more details.<br>"
+                        + "You should have received a copy of the GNU General Public License "
+                        + "along with this program.  If not, see <a href=\"http://www.gnu.org/"
+                        + "licenses/\">http://www.gnu.org/licenses</a>."
+                    wrapMode: Text.WordWrap
+                }
+                Item {
+                    width: parent.width
+                    height: 18
+                }
+                Label {
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    leftPadding: parent.width/10
+                    rightPadding: parent.width/10
+                    text: "Thanks to NASA for the wonderful default background."
+                    wrapMode: Text.WordWrap
+                }
+            }
+        }
+        Image {
+            id: logo
+            source: "../img/harbour-starship.svg"
+            width: height
+            anchors.verticalCenter: contentPanel.top
+            anchors.horizontalCenter: contentPanel.horizontalCenter
         }
     }
 }
