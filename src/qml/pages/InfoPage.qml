@@ -90,7 +90,7 @@ Image {
         }
         Image {
             id: logo
-            source: "../img/harbour-starship.svg"
+            source: "../img/buran.svg"
             width: height
             anchors.verticalCenter: contentPanel.top
             anchors.horizontalCenter: contentPanel.horizontalCenter
