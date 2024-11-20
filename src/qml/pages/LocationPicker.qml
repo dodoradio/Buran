@@ -20,14 +20,14 @@ import QtQuick 2.2
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import QtPositioning 5.15
-import QtLocation 5.15
+import QtLocation 6.8
 
 Pane {
     id: root
     signal activated(string placename, real lat, real lon)
     property alias placename: thisplacename.text
-    property alias lat: myMap.center.latitude
-    property alias lon: myMap.center.longitude
+    property real lat
+    property real lon
 
     Plugin {
         id: mapPlugin
@@ -51,8 +51,8 @@ Pane {
                 width: parent.width
                 text: qsTr("Select location")
                 onClicked: {
-                    console.warn("Location:", myMap.center)
-                    activated(placename, lat, lon)
+                    console.warn("Location:", myMap.map.center)
+                    activated(placename, myMap.map.center.latitude, myMap.map.center.longitude)
                     pageStack.pop()
                 }
             }
@@ -64,13 +64,13 @@ Pane {
                 id: latfield
                 text: lat
                 inputMethodHints: Qt.ImhFormattedNumbersOnly
-                onEditingFinished: { myMap.center.latitude = parseFloat(text) }
+                onEditingFinished: { myMap.map.center.latitude = parseFloat(text) }
             }
             TextField {
                 id: lonfield
                 text: lon
                 inputMethodHints: Qt.ImhFormattedNumbersOnly
-                onEditingFinished: { myMap.center.longitude = parseFloat(text) }
+                onEditingFinished: { myMap.map.center.longitude = parseFloat(text) }
             }
             Label {
                 text: qsTr("Name:")
@@ -82,12 +82,16 @@ Pane {
             }
         }
 
-        Map {
+        MapView {
             id: myMap
             width: parent.width
             height: parent.height - select.height - 20
-            plugin: mapPlugin
-            center: QtPositioning.coordinate(lat,lon)
+            map.plugin: mapPlugin
+            map.center: QtPositioning.coordinate(root.lat,root.lon)
+            map.onCenterChanged:{
+                latfield.text = myMap.map.center.latitude.toFixed(4);
+                lonfield.text = myMap.map.center.longitude.toFixed(4);
+            }
 
             Rectangle {
                 anchors.centerIn: parent
