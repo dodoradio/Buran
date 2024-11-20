@@ -32,7 +32,6 @@ Pane {
         id: settings
         category: "Weather"
         property alias savedlocations: weatherSettings.savedlocations
-        property string apikey: "36cc791575eef0fc1a4560ac24475dad"
     }
     Component {
         id: dragDelegate
@@ -188,7 +187,7 @@ Pane {
         onClicked: {
             watch.setWeatherCityName(locations.get(0).name)
             console.log("getting weather for ", locations.get(0).lat, ", ", locations.get(0).lng);
-            getWeatherForecast(locations.get(0).lat, locations.get(0).lng, settings.apikey)
+            getWeatherForecast(locations.get(0).lat, locations.get(0).lng);
         }
     }
 
@@ -210,21 +209,25 @@ Pane {
         savedlocations = JSON.stringify(datamodel)
     }
 
-    function getWeatherForecast(lat, lon, apikey) {
+    function getWeatherForecast(lat, lon) {
         const xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (xhttp.readyState == XMLHttpRequest.DONE && xhttp.status == 200) {
                 updateForecast(xhttp.responseText.toString());
             }
         };
-        var omit = "current,minutely,hourly,alerts";
-        var url = "https://api.openweathermap.org/data/2.5/onecall?lat="+lat+"&lon="+lon+"&exclude="+omit+"&appid="+apikey;
+        var url = "https://api.open-meteo.com/v1/forecast"
+            + "?latitude=" + lat
+            + "&longitude=" + lon
+            + "&timezone=auto"
+            + "&daily=weather_code,temperature_2m_max,temperature_2m_min";
         console.log("url: ", url);
         xhttp.open("GET", url);
         xhttp.send();
     }
 
     function updateForecast(forecast) {
+        console.log("forecast: ", forecast);
         watch.updateWeather(forecast)
     }
 }

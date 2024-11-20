@@ -12,7 +12,7 @@
 <context>
     <name>InfoPage</name>
     <message>
-        <location filename="../qml/pages/InfoPage.qml" line="60"/>
+        <location filename="../qml/pages/InfoPage.qml" line="52"/>
         <source>Version %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -46,38 +46,43 @@
         <translation type="obsolete">Benachrichtigungseinstellungen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainMenuPage.qml" line="69"/>
+        <location filename="../qml/pages/MainMenuPage.qml" line="105"/>
         <source>Enable time synchronisation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainMenuPage.qml" line="78"/>
+        <location filename="../qml/pages/MainMenuPage.qml" line="65"/>
         <source>Telescope</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainMenuPage.qml" line="78"/>
+        <location filename="../qml/pages/MainMenuPage.qml" line="65"/>
         <source>Watch-Finder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainMenuPage.qml" line="78"/>
+        <location filename="../qml/pages/MainMenuPage.qml" line="65"/>
         <source> is looking for you!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainMenuPage.qml" line="81"/>
+        <location filename="../qml/pages/MainMenuPage.qml" line="68"/>
         <source>Find my watch!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainMenuPage.qml" line="93"/>
+        <location filename="../qml/pages/MainMenuPage.qml" line="81"/>
         <source>Take a screenshot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MainMenuPage.qml" line="103"/>
+        <location filename="../qml/pages/MainMenuPage.qml" line="92"/>
         <source>Weather settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MainMenuPage.qml" line="115"/>
+        <source>App Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -126,32 +131,32 @@
 <context>
     <name>WeatherSettingsPage</name>
     <message>
-        <location filename="../qml/pages/WeatherSettingsPage.qml" line="96"/>
+        <location filename="../qml/pages/WeatherSettingsPage.qml" line="95"/>
         <source>LAT: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/WeatherSettingsPage.qml" line="99"/>
+        <location filename="../qml/pages/WeatherSettingsPage.qml" line="98"/>
         <source>LON: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/WeatherSettingsPage.qml" line="129"/>
+        <location filename="../qml/pages/WeatherSettingsPage.qml" line="128"/>
         <source>Locations</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/WeatherSettingsPage.qml" line="178"/>
+        <location filename="../qml/pages/WeatherSettingsPage.qml" line="177"/>
         <source>Delete Bottom Location</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/WeatherSettingsPage.qml" line="184"/>
+        <location filename="../qml/pages/WeatherSettingsPage.qml" line="183"/>
         <source>Fetch weather data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/WeatherSettingsPage.qml" line="153"/>
+        <location filename="../qml/pages/WeatherSettingsPage.qml" line="152"/>
         <source>Add Location</source>
         <translation type="unfinished"></translation>
     </message>
