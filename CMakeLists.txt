@@ -14,5 +14,3 @@ configure_file(
     "buran_config.h"
 )
 add_subdirectory(src)
-install(FILES buran.desktop DESTINATION /usr/share/applications)
-install(FILES buran.svg DESTINATION /usr/share/pixmaps)
