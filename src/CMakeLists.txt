@@ -49,4 +49,18 @@ target_include_directories(buran
         $<INSTALL_INTERFACE:.>
         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}>
 )
+if(UNIX AND NOT APPLE)
+    include(GNUInstallDirs)
+    set(iconsize 16 22 24 32 48 256)
+    install(FILES "assets/buran.svg"
+        DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/scalable/apps")
+    install(FILES "assets/buran.svg"
+        DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/pixmaps")
+    foreach(SZ ${iconsize})
+        install(FILES "icons/${SZ}x${SZ}/buran.png"
+            DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/${SZ}x${SZ}/apps")
+    endforeach(SZ)
+    install(FILES "${CMAKE_SOURCE_DIR}/buran.desktop"
+        DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/applications")
+endif()
 install(TARGETS buran)
